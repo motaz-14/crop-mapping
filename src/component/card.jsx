@@ -2,7 +2,7 @@ import React from 'react';
 import { FaArrowTrendUp } from "react-icons/fa6";
 
 const Card = ({ icon: Icon,styles, text, value, description }) => (
-  <div className="card bg-white w-64 h-52 rounded-xl p-2">
+  <div className="card bg-white w-64 px-5 h-52 rounded-xl p-2">
     <div className="card-icon m-5">
       <Icon className={styles}/>
     </div>

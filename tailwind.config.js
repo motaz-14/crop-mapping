@@ -3,6 +3,7 @@ module.exports = {
   corePlugins: { preflight: false },
   theme: {
     colors: {
+      'transparentColor': 'transparent',
       'primaryColor': '#01B68D',
       'secondaryColor': '#707070',
       'white': '#ffff',
