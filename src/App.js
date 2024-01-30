@@ -8,12 +8,13 @@ import {
   Routes
  } from "react-router-dom";
 function App() {
+
   return (
     <div className="App">
       <LanguageProvider>
       <Routes>
-        <Route path='/' element={<Login/>}/>
-        <Route path='dashboard' element={<Dashboard/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/dashboard/*' element={<Dashboard/>}/>
       </Routes>
       </LanguageProvider>
     </div>

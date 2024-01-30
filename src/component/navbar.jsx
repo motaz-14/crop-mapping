@@ -35,7 +35,7 @@ function Navbar() {
     <header className="bg-background-main-screen">
       <div className="flex items-center justify-between p-4">
         {/* Username */}
-        <div className="text-xl font-semibold w-[200px]">
+        <div className="font-semibold  text-secondaryColor">
           <div style={{ textAlign: language === "en" ? "left" : "right" }}>
             {getText("Hello, Mohamed Adel", "مرحبا، محمد عادل")}
           </div>
@@ -48,7 +48,7 @@ function Navbar() {
         </div>
 
         {/* Search Input */}
-        <div className=" w-[460px] flex items-center justify-center bg-white text-start max-sm:mx-1 p-3 px-11 rounded-md">
+        <div className=" w-[460px] flex items-center justify-center bg-white text-start max-sm:mx-1 p-3 px-5 rounded-2xl">
           <CiSearch className="text-secondaryColor text-2xl" />
           <input
             onChange={(e) => setSearch(e.target.value)}

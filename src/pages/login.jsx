@@ -18,7 +18,7 @@ function Login() {
     } else {
       console.log(email);
       console.log(password);
-      window.location.pathname="/dashboard"
+      window.location.pathname = "/dashboard";
       setError(""); // da 34an lw msh empty
     }
   };
@@ -30,10 +30,13 @@ function Login() {
           <div className="w-full lg:w-1/2 py-16 px-6 lg:px-12">
             <form onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="emailInput" className="text-secondaryColor max-sm:ml-1">
+                <label
+                  htmlFor="emailInput"
+                  className="text-secondaryColor max-sm:ml-1 ml-[0.4rem] font-spartan font-normal text-[15px]"
+                >
                   Email Address
                 </label>
-                <div className="flex justify-start items-center bg-[#f7f7f7] max-sm:mx-1 p-3 rounded-md mt-2">
+                <div className="flex justify-start items-center bg-[#f7f7f7] max-sm:mx-1 p-3 w-[380px] rounded-3xl mt-2">
                   <MdOutlineEmail className="text-[#707070] text-2xl" />
                   <input
                     onChange={(e) => setEmail(e.target.value)}
@@ -43,15 +46,22 @@ function Login() {
                     className="border-none focus:border-none focus:outline-none outline-none w-full bg-[#f7f7f7]"
                   />
                 </div>
-                <p>{error && <span className="text-red-500 text-base">{error}</span>}</p>
+                <p>
+                  {error && (
+                    <span className="text-red-500 text-base">{error}</span>
+                  )}
+                </p>
               </div>
 
               <div className="mt-5">
-                <label htmlFor="passwordInput" className="text-[#707070] max-sm:ml-1">
+                <label
+                  htmlFor="passwordInput"
+                  className="text-secondaryColor max-sm:ml-1 ml-[0.4rem] font-spartan font-normal text-[15px]"
+                >
                   Password
                 </label>
-                <div className="flex justify-between items-center bg-[#f7f7f7] p-3 rounded-md mt-2 max-sm:mx-1">
-                  <IoKeyOutline className="text-secondaryColor text-2xl" />
+                <div className="flex justify-between items-center bg-[#f7f7f7] p-3 w-[380px] rounded-3xl mt-2 max-sm:mx-1">
+                  <IoKeyOutline className="text-black text-2xl" />
                   <input
                     className="border-none focus:border-none focus:outline-none outline-none w-full bg-[#f7f7f7]"
                     type={visible ? "text" : "password"}
@@ -71,16 +81,19 @@ function Login() {
                     )}
                   </div>
                 </div>
-                <p>{error && <span className="text-red-500 text-base">{error}</span>}</p>
+                <p>
+                  {error && (
+                    <span className="text-red-500 text-base">{error}</span>
+                  )}
+                </p>
               </div>
 
               <div className="mt-5 flex justify-center w-full">
                 <button
-                  type="submit"
-                  className="text-white cursor-pointer bg-gradient-to-tr from-[#01B68D] to-[#078e6e] border-none focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2"
-                >
-                  دخول
-                  <IoIosLogOut className="ms-4 text-secondaryColor text-2xl bg-white p-1 rounded-md" />
+                type="submit"
+                 className="w-40 text-center cursor-pointer bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white font-bold py-2 px-4 rounded-full flex items-center justify-between outline-none border-none">
+                  <span className="flex-1 font-extrabold">LOGIN</span>
+                  <span className="flex-0 rounded-full text-secondaryColor bg-white p-2 items-center flex justify-center"><IoIosLogOut className="text-gray-500 text-sm" /></span>
                 </button>
               </div>
             </form>

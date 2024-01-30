@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bar, Chart } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 const data = {
   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
