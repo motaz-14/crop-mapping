@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import Member from './member';
+import Assumption from './assumption';
 
 
 export default function Addbutton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
   const handleOptionClick = (option) => {
+    setSelectedOption(option);
     console.log(`Selected option: ${option}`);
     setIsDropdownOpen(false);
   };
-
+  
   return (
       <>
       <div className="relative">
@@ -36,13 +40,15 @@ export default function Addbutton() {
             </button>
             <button
               className="block w-full cursor-pointer text-center p-2 px-10 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-md outline-none border-none"
-              onClick={() => handleOptionClick('Admin')}
+              onClick={() => handleOptionClick('Assumption')}
             >
-              Admin
+              Assumption
             </button>
           </div>
         )}
       </div>
+      {selectedOption === 'Member' && <Member closeModal={setSelectedOption}/>}
+      {selectedOption === 'Assumption' && <Assumption closeModal={setSelectedOption}/>}
       </>
       
   );

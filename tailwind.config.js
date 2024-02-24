@@ -6,6 +6,7 @@ module.exports = {
       'transparentColor': 'transparent',
       'primaryColor': '#01B68D',
       'secondaryColor': '#707070',
+      'breakColor': '#22577A',
       'white': '#ffff',
       'black': '#000000',
       'background-main-screen': '#f7f7f7',
