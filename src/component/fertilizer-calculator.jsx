@@ -36,7 +36,7 @@ function FertilizerCalculator() {
             </div>
             <div>
               <div className="flex flex-row justify-around  cursor-pointer">
-                <div className="bg-[#F5F5F5] cursor-pointer w-1/4 rounded-md flex justify-center items-center p-4 hover:border-primaryColor">
+                <div className="bg-[#F5F5F5] cursor-pointer w-1/4 rounded-md flex justify-center items-center p-4 hover:border-primaryColor hover:border-2">
                   <img src={fBag} alt="#" width={"110px"} height={"110px"} />
                 </div>
                 <div className="bg-[#F5F5F5]  cursor-pointer w-1/4 rounded-md flex justify-center items-center p-4 hover:border-primaryColor hover:border-2">
