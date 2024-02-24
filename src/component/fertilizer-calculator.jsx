@@ -25,7 +25,7 @@ function FertilizerCalculator() {
           </Link>
         </div>
         <div className="w-full">
-          <div className="bg-white w-2/5 p-4 flex flex-col gap-4">
+          <div className="bg-white w-2/5 p-4 flex flex-col gap-4 ">
             <div className="gap-3 flex flex-row items-center">
               <span className="bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white font-semibold p-3 rounded-md">
                 1
@@ -35,11 +35,11 @@ function FertilizerCalculator() {
               </span>
             </div>
             <div>
-              <div className="flex flex-row justify-around">
-                <div className="bg-[#F5F5F5] cursor-pointer w-1/4 rounded-md flex justify-center items-center p-4 hover:border-primaryColor hover:border-2">
+              <div className="flex flex-row justify-around bg-transparentColor">
+                <div className="bg-[#F5F5F5] cursor-pointer w-1/4 rounded-md flex justify-center items-center p-4  hover:outline-2 hover:outline hover:outline-primaryColor">
                   <img src={fBag} alt="#" width={"110px"} height={"110px"} />
                 </div>
-                <div className="bg-[#F5F5F5]  cursor-pointer w-1/4 rounded-md border-primaryColor border-8 flex justify-center items-center p-4 ">
+                <div className="bg-[#F5F5F5] cursor-pointer w-1/4 rounded-md border flex justify-center items-center p-4  hover:outline-2 hover:outline hover:outline-primaryColor">
                   <img src={fBag} alt="#" width={"110px"} height={"110px"} />
                 </div>
               </div>
