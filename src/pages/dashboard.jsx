@@ -4,10 +4,11 @@ import SideBar from "../component/sidebar";
 import Navbar from "../component/navbar";
 import MainContent from "../component/maincontent";
 import UserManagement from "../component/user-management";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { ReactComponent as LocationIcon } from "../assets/locationicon.svg";
 import SeedsDetails from "../component/seedsdetails";
 import FertilizerCalculator from "../component/fertilizer-calculator";
+import MapComponent from "../component/map";
 
 function Dashboard() {
   useEffect(() => {
@@ -29,11 +30,16 @@ function Dashboard() {
             <Route path="user-management" element={<UserManagement />} />
             <Route path="seeds-details" element={<SeedsDetails />} />
             <Route path="seeds-details/fertilizer-calculator" element={<FertilizerCalculator />} />
+            <Route path="map" element={<MapComponent/>} />
           </Routes>
         </div>
-        <button className="fixed bottom-4 right-4 w-16 h-16 rounded-full cursor-pointer bg-gradient-to-r from-[#01E5B2] to-[#01B68D] border-none outline-none">
+        <Link
+        to="map"
+        className="fixed bottom-4 items-center right-4 w-16 h-16 rounded-full cursor-pointer bg-gradient-to-r from-[#01E5B2] to-[#01B68D] border-none outline-none">
+          <div className="w-full h-[90%] flex justify-center items-center content-center">
           <LocationIcon className="w-7 h-7" />
-        </button>
+          </div>
+        </Link>
       </div>
     </>
   );
