@@ -12,7 +12,7 @@ function Navbar() {
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
   };
-  console.log(search);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
