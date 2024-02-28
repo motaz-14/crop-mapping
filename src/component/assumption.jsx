@@ -2,12 +2,12 @@ import { useState } from "react";
 import { CiExport } from "react-icons/ci";
 
 function Assumption({ closeModal }) {
-    const [selectedSeed, setSelectedSeed] = useState(null);
-    const [status, setStatus] = useState("pending");
+  const [selectedSeed, setSelectedSeed] = useState(null);
+  const [status, setStatus] = useState("pending");
 
-    const seeds = ["Seed 1", "Seed 2"];
+  const seeds = ["Seed 1", "Seed 2"];
 
-    const handleSeedSelect = (seed) => {
+  const handleSeedSelect = (seed) => {
     setSelectedSeed(seed);
   };
   const handleStatusChange = (newStatus) => {
@@ -21,7 +21,7 @@ function Assumption({ closeModal }) {
             <h2 className="text-secondaryColor font-bold ml-5">Add New Assumption </h2>
             <div className="flex flex-row gap-2">
               <div className="p-4 rounded-lg">
-                <div class="relative">
+                <div className="relative">
                   <input
                     type="text"
                     id="first-name"
@@ -30,7 +30,7 @@ function Assumption({ closeModal }) {
                     placeholder=""
                   />
                   <label
-                    for="first-name"
+                    htmlFor="first-name"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
                     First Name
@@ -38,7 +38,7 @@ function Assumption({ closeModal }) {
                 </div>
               </div>
               <div className="p-4 rounded-lg">
-                <div class="relative">
+                <div className="relative">
                   <input
                     type="text"
                     id="last-name"
@@ -47,7 +47,7 @@ function Assumption({ closeModal }) {
                     placeholder=""
                   />
                   <label
-                    for="last-name"
+                    htmlFor="last-name"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
                     Last Name
@@ -57,7 +57,7 @@ function Assumption({ closeModal }) {
             </div>
             <div className="flex flex-row gap-2">
               <div className="p-4 rounded-lg">
-                <div class="relative">
+                <div className="relative">
                   <input
                     type="text"
                     id="nation-id"
@@ -66,7 +66,7 @@ function Assumption({ closeModal }) {
                     placeholder=""
                   />
                   <label
-                    for="nation-id"
+                    htmlFor="nation-id"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
                     Nation ID
@@ -74,7 +74,7 @@ function Assumption({ closeModal }) {
                 </div>
               </div>
               <div className="p-4 rounded-lg">
-                <div class="relative">
+                <div className="relative">
                   <input
                     type="text"
                     id="address"
@@ -83,7 +83,7 @@ function Assumption({ closeModal }) {
                     placeholder=""
                   />
                   <label
-                    for="address"
+                    htmlFor="address"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
                     Address
@@ -93,7 +93,7 @@ function Assumption({ closeModal }) {
             </div>
             <div className="flex flex-row gap-2">
               <div className="p-4 rounded-lg">
-                <div class="relative">
+                <div className="relative">
                   <input
                     type="text"
                     id="mobile-number"
@@ -102,7 +102,7 @@ function Assumption({ closeModal }) {
                     placeholder=""
                   />
                   <label
-                    for="mobile-number"
+                    htmlFor="mobile-number"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
                     Mobile Number
@@ -110,7 +110,7 @@ function Assumption({ closeModal }) {
                 </div>
               </div>
               <div className="p-4 rounded-lg">
-                <div class="relative">
+                <div className="relative">
                   <input
                     type="text"
                     id="farm-location"
@@ -119,7 +119,7 @@ function Assumption({ closeModal }) {
                     placeholder=""
                   />
                   <label
-                    for="farm-location"
+                    htmlFor="farm-location"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
                     Farm Location
@@ -128,95 +128,72 @@ function Assumption({ closeModal }) {
               </div>
             </div>
             <div className="flex flex-row gap-2 ml-4 mt-6">
-              <div>
-                <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
-                  <div>
-                    <CiExport size={14} />
-                  </div>
-                  <div>Upload Farmer Card</div>
-                </button>
-              </div>
-              <div>
-                <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white  rounded-lg outline-none border-primaryColor border">
-                  <div>
-                    <CiExport size={14} />
-                  </div>
-                  <div>Upload photo</div>
-                </button>
-              </div>
+              <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
+                <CiExport size={14} />
+                Upload Farmer Card
+              </button>
+              <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white  rounded-lg outline-none border-primaryColor border">
+                <CiExport size={14} />
+                Upload photo
+              </button>
             </div>
           </div>
           <div className="w-1/2 relative h-5/6">
             <div className="absolute inset-y-36 right-24">
-            <select
-  value={selectedSeed || ''}
-  onChange={(e) => handleSeedSelect(e.target.value)}
-  className="inline-flex justify-center items-center w-full px-4 py-2 bg-[#EAE8E8] text-sm font-medium text-secondaryColor rounded-md focus:outline-none focus:ring focus:border-blue-300"
->
-  <option value="" disabled>
-    Select a seed
-  </option>
-  {seeds.map((seed) => (
-    <option key={seed} value={seed}>
-      {seed}
-    </option>
-  ))}
-</select>
+              <select
+                value={selectedSeed || ''}
+                onChange={(e) => handleSeedSelect(e.target.value)}
+                className="inline-flex justify-center items-center w-full px-4 py-2 bg-[#EAE8E8] text-sm font-medium text-secondaryColor rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              >
+                <option value="" disabled>
+                  Select a seed
+                </option>
+                {seeds.map((seed) => (
+                  <option key={seed} value={seed}>
+                    {seed}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div className="absolute inset-y-52 left-[225px] ">
-            <span className="text-secondaryColor">Status :</span>
+            <div className="absolute inset-y-52 left-[225px]">
+              <span className="text-secondaryColor">Status :</span>
             </div>
             <div className="absolute inset-y-60 right-14">
-            <div className="flex flex-row gap-5">
-            <div className="flex justify-center items-center text-center">
-                <div>
-                <input id="pending" type="radio"
-                checked={status === "pending"}
-                onChange={() => handleStatusChange("pending")}
-                />
+              <div className="flex flex-row gap-5">
+                <div className="flex justify-center items-center text-center">
+                  <input id="pending" type="radio"
+                    checked={status === "pending"}
+                    onChange={() => handleStatusChange("pending")}
+                  />
+                  <label className="text-secondaryColor text-sm" htmlFor="pending">Pending</label>
                 </div>
-                <div>
-                <label className="text-secondaryColor text-sm" htmlFor="pending">Pending</label>
+                <div className="flex justify-center">
+                  <input id="true" type="radio"
+                    checked={status === "true"}
+                    onChange={() => handleStatusChange("true")}
+                  />
+                  <label className="text-secondaryColor text-sm" htmlFor="true">True</label>
                 </div>
-            </div>
-            <div className="flex justify-center">
-                <div>
-                <input id="true" type="radio"
-                checked={status === "true"}
-                onChange={() => handleStatusChange("true")}
-                />
+                <div className="flex justify-center">
+                  <input
+                    checked={status === "false"}
+                    onChange={() => handleStatusChange("false")}
+                    id="false" type="radio"
+                  />
+                  <label className="text-secondaryColor text-sm" htmlFor="false">False</label>
                 </div>
-                <div>
-                <label className="text-secondaryColor text-sm" htmlFor="true">True</label>
-                </div>
-            </div>
-            <div className="flex justify-center">
-                <div>
-                <input
-                 checked={status === "false"}
-                 onChange={() => handleStatusChange("false")}
-                id="false" type="radio"/>
-                </div>
-                <div>
-                <label className="text-secondaryColor text-sm" htmlFor="false">False</label>
-                </div>
-            </div>
-            </div>
+              </div>
             </div>
             <div className="absolute bottom-0 right-10 flex flex-row gap-3 mt-6 w-full items-end justify-end">
-              <div>
-                <button className="cursor-pointer items-center font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
-                  <div>Save</div>
-                </button>
-              </div>
-              <div>
-                <button
-                  onClick={() => closeModal(false)}
-                  className="cursor-pointer items-center font-semibold text-center w-28 py-2 bg-transparentColor text-primaryColor rounded-2xl outline-none border-primaryColor border"
-                >
-                  <div>Cancel</div>
-                </button>
-              </div>
+              <button className="cursor-pointer items-center font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
+                Save
+              </button>
+              <button
+                onClick={() => closeModal(false)}
+                className="cursor-pointer items-center font-semibold text-center w-28 py-2 bg-transparentColor text-primaryColor rounded-2xl outline-none border-primaryColor border"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -226,4 +203,4 @@ function Assumption({ closeModal }) {
 
 }
 
-export default Assumption
+export default Assumption;

@@ -1,11 +1,11 @@
 import WebFont from "webfontloader";
 import { useEffect } from "react";
-import SideBar from "../component/sidebar";
-import Navbar from "../component/navbar";
-import MainContent from "../component/maincontent";
-import UserManagement from "../component/user-management";
 import { Routes, Route, Link } from "react-router-dom";
 import { ReactComponent as LocationIcon } from "../assets/locationicon.svg";
+import SideBar from "../component/sidebar";
+import Navbar from "../component/navbar";
+import MainContent from "../component/dashboard_main_content/maincontent";
+import UserManagement from "../component/user_management/user-management";
 import SeedsDetails from "../component/seedsdetails";
 import FertilizerCalculator from "../component/fertilizer-calculator";
 import MapComponent from "../component/map";

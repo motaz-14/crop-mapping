@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import avatarImage from "../assets/useravatar.svg";
+import avatarImage from "./useravatar.svg";
 import { VscEye } from "react-icons/vsc";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -16,128 +16,7 @@ function UserManagement() {
       name: "mohamed dola",
       mobile: "01143333265",
       status: "warning",
-    },
-    {
-      id: 2,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "banned",
-    },
-    {
-      id: 3,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 4,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-found",
-    },
-    {
-      id: 5,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 6,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "warning",
-    },
-    {
-      id: 7,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 8,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 9,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 10,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 11,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 12,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 13,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 14,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 15,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 16,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-
-    {
-      id: 17,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    {
-      id: 18,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "not-violated",
-    },
-    // Add more members as needed
+    }
   ];
   const totalMembers = members.length;
   const totalPages = Math.ceil(totalMembers / membersPerPage);
@@ -193,7 +72,7 @@ function UserManagement() {
       </div>
       <div className="w-full px-6 bg-transparentColor mt-2 mb-2 ml- flex flex-row justify-between ">
         {/* addnew export import filter */}
-      <UserManagementBtns/>
+      <UserManagementBtns />
       </div>
       <div className="flex flex-col bg-transparentColor rounded-t-2xl">
         {/* header */}

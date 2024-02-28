@@ -1,7 +1,7 @@
 import React from 'react'
 import { CiExport } from "react-icons/ci";
 import { CiImport } from "react-icons/ci";
-import Addbutton from "./addbutton";
+import Addbutton from "../addbutton";
 import { CiFilter } from "react-icons/ci";
 
 function UserManagementBtns() {

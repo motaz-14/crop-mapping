@@ -2,9 +2,8 @@ import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
 import { GrAnnounce } from "react-icons/gr";
-import Card from "../component/card";
-import Calendar from "../component/calender";
-import MyChart from "../component/chart";
+import Calendar from "./calender"; 
+import MyChart from "./chart"; 
 import MostSeeds from "./mostseeds";
 import {
   BarChart,
@@ -15,6 +14,7 @@ import {
   Legend,
   CartesianGrid,
 } from "recharts";
+import Card from "./card";
 
 function MainContent() {
   const barChartData = [
