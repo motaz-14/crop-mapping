@@ -22,18 +22,6 @@ const MapComponent = () => {
     setSelectedArea([]);
   };
 
-  const copyLatitude = () => {
-    if (selectedArea.length > 0) {
-      const latitude = selectedArea[0][0];
-      navigator.clipboard.writeText(latitude.toString())
-        .then(() => {
-          console.log('Latitude copied to clipboard:', latitude);
-        })
-        .catch((error) => {
-          console.error('Error copying latitude to clipboard:', error);
-        });
-    }
-  };
 
   const sendLocation = () => {
     if (latlungs.length > 0) {
