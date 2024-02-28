@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import seedsImage from "../assets/tomato.svg";
+import seedsImage from "../../assets/tomato.svg";
 import { FiEdit } from "react-icons/fi";
 import { FaEye } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { CiCalculator1 } from "react-icons/ci";
-import Addbutton from "./addbutton";
+import Addbutton from "../addbutton";
 import { Link } from "react-router-dom";
 
 function SeedsDetails() {

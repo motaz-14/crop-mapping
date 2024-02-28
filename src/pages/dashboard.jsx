@@ -6,8 +6,8 @@ import SideBar from "../component/sidebar";
 import Navbar from "../component/navbar";
 import MainContent from "../component/dashboard_main_content/maincontent";
 import UserManagement from "../component/user_management/user-management";
-import SeedsDetails from "../component/seedsdetails";
-import FertilizerCalculator from "../component/fertilizer-calculator";
+import SeedsDetails from "../component/seeds_details/seedsdetails";
+import FertilizerCalculator from "../component/fertilizer_calculator/fertilizer-calculator";
 import MapComponent from "../component/map";
 
 function Dashboard() {

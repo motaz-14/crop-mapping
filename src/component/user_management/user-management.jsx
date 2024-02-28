@@ -3,9 +3,7 @@ import avatarImage from "../../assets/useravatar.svg";
 import { VscEye } from "react-icons/vsc";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
-import UserManagementBtns from "./usermanagment-btns";
-
-
+import UserManagementBtns from "../user_management/usermanagment-btns";
 function UserManagement() {
   const membersPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,6 +15,7 @@ function UserManagement() {
       mobile: "01143333265",
       status: "warning",
     }
+    // Add more members as needed
   ];
   const totalMembers = members.length;
   const totalPages = Math.ceil(totalMembers / membersPerPage);
@@ -72,7 +71,7 @@ function UserManagement() {
       </div>
       <div className="w-full px-6 bg-transparentColor mt-2 mb-2 ml- flex flex-row justify-between ">
         {/* addnew export import filter */}
-      <UserManagementBtns />
+      <UserManagementBtns/>
       </div>
       <div className="flex flex-col bg-transparentColor rounded-t-2xl">
         {/* header */}

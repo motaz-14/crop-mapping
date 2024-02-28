@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import fBag from "../assets/fertilizer-bag.svg";
+import fBag from "../../assets/fertilizer-bag.svg";
 
 function FertilizerCalculator() {
   const nutrients = [

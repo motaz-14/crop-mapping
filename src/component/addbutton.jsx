@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import Member from './member';
-import Assumption from './assumption';
+import Member from '../component/pop_up_pages/member';
+import Assumption from '../component/pop_up_pages/assumption';
 
 export default function Addbutton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
