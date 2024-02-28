@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import avatarImage from "./useravatar.svg";
+import avatarImage from "../../assets/useravatar.svg";
 import { VscEye } from "react-icons/vsc";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
