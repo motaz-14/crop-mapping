@@ -13,10 +13,7 @@ const MapComponent = () => {
     const ne = bounds.getNorthEast();
     const sw = bounds.getSouthWest();
     setSelectedArea([[ne.lat, ne.lng], [sw.lat, sw.lng]]);
-    const latlngs = e.layer.getLatLngs()[0]; // Assuming the shape has only one set of coordinates
-  const [lat, lng] = [latlngs.lat, latlngs.lng];
-    console.log('Selected Point:', { latitude: lat, longitude: lng });
-
+    console.log(selectedArea);
   };
 
   const clearSelection = () => {
