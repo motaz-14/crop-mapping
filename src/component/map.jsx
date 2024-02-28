@@ -38,15 +38,14 @@ const MapComponent = () => {
   const sendLocation = () => {
     if (latlungs.length > 0) {
       console.log(latlungs);
-
-      
     }
   };
 
   return (
     <div className="w-11/12 h-4/5 flex flex-col">
       <MapContainer center={[30.176613488664007, 31.664954709701263]} zoom={10} style={{ height: '100%', width: '100%' }}>
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <TileLayer url="https://maptiles.p.rapidapi.com/en/map/v1/{z}/{x}/{y}.png?rapidapi-key=9270635570mshce84b9ebfa3a04ep1de683jsnc813f569c7e2"
+        />
         <FeatureGroup>
           <EditControl
             
@@ -57,6 +56,7 @@ const MapComponent = () => {
             onDeleted={()=>{
               setLatlungs([]);
             }}
+            
             draw={{
               rectangle: true,
               circle: false,
