@@ -9,6 +9,7 @@ import UserManagement from "../component/user_management/user-management";
 import SeedsDetails from "../component/seeds_details/seedsdetails";
 import FertilizerCalculator from "../component/fertilizer_calculator/fertilizer-calculator";
 import MapComponent from "../component/map";
+import Cookies from "js-cookie";
 
 function Dashboard() {
   useEffect(() => {
@@ -17,6 +18,13 @@ function Dashboard() {
         families: ["Spartan:100,200,300,400,500,600,700,800,900"],
       },
     });
+  }, []);
+  useEffect(() => {
+    const token = Cookies.get('jwt');
+
+    if (!token) {
+      window.location.href = '/'; 
+    }
   }, []);
 
   return (

@@ -4,22 +4,36 @@ import { FaEye, FaRegEyeSlash } from "react-icons/fa";
 import { IoKeyOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
+import Cookies from "js-cookie";
+import { useEffect } from 'react';
+import axios from "axios";
 
 function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState("");
-
-  const handleSubmit = (e) => {
+  
+ 
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (email === "" || password === "") {
       setError("Field is empty ya fala7");
     } else {
-      console.log(email);
-      console.log(password);
-      window.location.pathname = "/dashboard";
-      setError(""); // da 34an lw msh empty
+      try {
+        const response =await axios.post("http://localhost:8080/api/auth/login",{
+          username:email,
+          password,
+        });
+        if (response.status == 200){
+          Cookies.set("jwt",response.data.token);
+        }
+        window.location.pathname = "/dashboard";
+        setError(""); // da 34an lw msh empty
+      } catch (error) {
+        setError("Wrong Data Sent!")
+      }
+     
     }
   };
 
