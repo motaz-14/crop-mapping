@@ -5,7 +5,6 @@ import { IoKeyOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import Cookies from "js-cookie";
-import { useEffect } from 'react';
 import axios from "axios";
 
 function Login() {
@@ -18,7 +17,7 @@ function Login() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     if (email === "" || password === "") {
-      setError("Field is empty ya fala7");
+      setError("Fields are required!");
     } else {
       try {
         const response =await axios.post("http://localhost:8080/api/auth/login",{
@@ -60,11 +59,7 @@ function Login() {
                     className="border-none focus:border-none focus:outline-none outline-none w-full bg-[#f7f7f7]"
                   />
                 </div>
-                <p>
-                  {error && (
-                    <span className="text-red-500 text-base">{error}</span>
-                  )}
-                </p>
+              
               </div>
 
               <div className="mt-5">

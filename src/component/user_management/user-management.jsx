@@ -1,25 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import avatarImage from "../../assets/useravatar.svg";
 import { VscEye } from "react-icons/vsc";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import UserManagementBtns from "../user_management/usermanagment-btns";
+import axios from "axios";
+import Cookies from "js-cookie";
 function UserManagement() {
   const membersPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
-  const members = [
-    {
-      id: 1,
-      avatar: avatarImage,
-      name: "mohamed dola",
-      mobile: "01143333265",
-      status: "warning",
+  const [members , setMembers] = useState([]);
+  const [totalMembers , setTotalMembers] = useState(0);
+  const [totalPages , setTotalPages] = useState(0);
+ 
+ 
+  const getFarmers =async ()=>{
+    try {
+      const response = await axios.get("http://localhost:8080/api/farmer/",{
+        headers: {
+          "authorization" : `Bearer ${Cookies.get("jwt")}`
+        }
+      }
+      );
+      console.log(response);
+      setMembers(response.data.farmers);
+      setTotalMembers(response.data.farmers.length);
+      setTotalPages(Math.ceil(response.data.farmers.length/membersPerPage));
+      
+    } catch (error) {
+      console.log(error);
     }
-    // Add more members as needed
-  ];
-  const totalMembers = members.length;
-  const totalPages = Math.ceil(totalMembers / membersPerPage);
-
+  } 
+  useEffect( ()=>{
+    async function fetchData(){
+      await getFarmers();
+    }
+    fetchData();
+     
+  },[])
   const handleClickNext = () => {
     setCurrentPage((prevPage) =>
       prevPage < totalPages ? prevPage + 1 : prevPage
@@ -78,6 +96,9 @@ function UserManagement() {
       <div className="flex justify-center items-center gap-2">
         {enabled ? (
            <>
+            <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
+            National ID
+          </div>
            <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
              Photo
            </div>
@@ -103,6 +124,9 @@ function UserManagement() {
           
         ) : (
           <>
+          <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
+            National ID
+          </div>
           <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
             Photo
           </div>
@@ -135,10 +159,13 @@ function UserManagement() {
               
               {enabled ? (
                 <>
+                <div className="p-4 text-secondaryColor font-bold text-[14px] text-center w-1/5">
+                  {member.nationalId}
+                </div>
                 <div className="p-4 text-center self-center flex justify-center w-1/5">
                 <div className="w-8 h-8 overflow-hidden rounded-full">
                   <img
-                    src={member.avatar}
+                    src={member.photo}
                     alt="Avatar"
                     className="w-full h-full object-cover"
                   />
@@ -181,10 +208,13 @@ function UserManagement() {
                 </>
               ) : (
                 <>
+                <div className="p-4 text-secondaryColor font-bold text-[14px] text-center w-1/5">
+                  {member.nationalId}
+                </div>
                 <div className="text-center self-center w-1/5 flex justify-center">
                 <div className="w-8 h-8 overflow-hidden rounded-full">
                   <img
-                    src={member.avatar}
+                    src={member.photo}
                     alt="Avatar"
                     className="w-full h-full object-cover"
                   />
@@ -194,7 +224,7 @@ function UserManagement() {
                 {member.name}
               </div>
               <div className="p-4 text-secondaryColor font-bold text-[14px] text-center w-1/5">
-                  {member.mobile}
+                  {member.phoneNumber}
                 </div>
                 <div className="p-4 text-center flex justify-center items-center w-1/5">
                 <div
@@ -255,11 +285,10 @@ function UserManagement() {
 
 const getStatusColor = (status) => {
   switch (status) {
-    case "warning":
-      return "bg-warning-background text-warning-text";
+    
     case "banned":
       return "bg-banned-background text-banned-text";
-    case "not-violated":
+    case "Available":
       return "bg-not-violated-background text-not-violated-text";
     default:
       return "bg-black text-white";

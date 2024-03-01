@@ -4,6 +4,8 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const MapComponent = () => {
   const [selectedArea, setSelectedArea] = useState([]);
@@ -23,9 +25,20 @@ const MapComponent = () => {
   };
 
 
-  const sendLocation = () => {
+  const sendLocation = async () => {
     if (latlungs.length > 0) {
       console.log(latlungs);
+      try {
+        const response  = await axios.post("http://localhost:8080/api/location/predict",{
+          points : latlungs
+        },{headers : {
+          authorization: `Bearer ${Cookies.get("jwt")}`
+        }});
+        console.log(response);
+      } catch (error) {
+        alert(error.response.data.message)
+        console.log(error);
+      }
     }
   };
 

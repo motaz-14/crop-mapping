@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import seedsImage from "../../assets/tomato.svg";
 import { FiEdit } from "react-icons/fi";
@@ -7,164 +7,39 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { CiCalculator1 } from "react-icons/ci";
 import Addbutton from "../addbutton";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function SeedsDetails() {
-  const seedes = [
-    {
-      id: 1,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 2,
-      seedsimages: seedsImage,
-      name: "Potato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 3,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 4,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 5,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 6,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 7,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 8,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 9,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 10,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 11,
-      seedsimages: seedsImage,
-      name: "Tomato",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 12,
-      seedsimages: seedsImage,
-      name: "5ara",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 13,
-      seedsimages: seedsImage,
-      name: "5ara",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 14,
-      seedsimages: seedsImage,
-      name: "5ara",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 15,
-      seedsimages: seedsImage,
-      name: "5ara",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 16,
-      seedsimages: seedsImage,
-      name: "5ara",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-
-    {
-      id: 17,
-      seedsimages: seedsImage,
-      name: "5ara",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    {
-      id: 18,
-      seedsimages: seedsImage,
-      name: "5ara",
-      category: "Vegetable",
-      fertilizer: "Nitrogen fertilizers",
-      quan: "4.7 lb fertilizer per 1000 sq ft",
-    },
-    // Add more seedes as needed
-  ];
+  const [seeds,setSeeds] = useState([]);
+  
   const seedesPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalseedes = seedes.length;
+  const totalseedes = seeds.length;
   const totalPages = Math.ceil(totalseedes / seedesPerPage);
   const [showDropdown, setShowDropdown] = useState(
     Array(seedesPerPage).fill(false)
   );
-
+  
+  const getSeeds = async ()=>{
+    try {
+      const response = await axios.get("http://localhost:8080/api/plant",{
+        headers:{
+          "authorization" : `Bearer ${Cookies.get("jwt")}`
+        }
+      });
+      setSeeds(response.data.plants);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(()=>{
+    async function fetchData(){
+      await getSeeds();
+    }
+    fetchData();
+  },[]);
   const handleClickNext = () => {
     setCurrentPage((prevPage) =>
       prevPage < totalPages ? prevPage + 1 : prevPage
@@ -219,7 +94,7 @@ function SeedsDetails() {
             {/* edit */}
           </div>
         </div>
-        {seedes
+        {seeds
           .slice((currentPage - 1) * seedesPerPage, currentPage * seedesPerPage)
           .map((seede, index) => (
             <div
@@ -228,29 +103,29 @@ function SeedsDetails() {
             >
               <div className="p-4 text-center self-center flex justify-center gap-1 w-1/5">
                 <input type="checkbox" className="cursor-pointer" />
-                <div className="w-8 h-8 overflow-hidden rounded-full">
+                <div className="w-14 h-14 overflow-hidden rounded-full">
                   <img
-                    src={seede.seedsimages}
+                    src={seede.photo}
                     alt="seedsimages"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <div className="font-semibold text-[13px] bg-transparentColor text-secondaryColor">
+                  <div className="font-semibold text-[23px] bg-transparentColor text-secondaryColor">
                     {seede.name}
                   </div>
-                  <div className="font-semibold text-[10px] bg-transparentColor text-secondaryColor">
+                  <div className="font-semibold text-[13px] bg-transparentColor text-secondaryColor">
                     {seede.category}
                   </div>
                 </div>
               </div>
 
               <div className="p-4 text-center font-semibold text-[15px] w-1/5 text-breakColor">
-                {seede.fertilizer}
+                {seede.fertilizer || "Nitrogen"}
               </div>
 
-              <div className="p-4 text-center font-semibold text-[15px] w-1/5 text-banned-text">
-                {seede.quan}
+              <div className="p-4 text-center font-semibold text-[15px] w-1/5 text-breakColor">
+                {seede.fertlizerConsumption}
               </div>
               <div className="p-4 text-center w-1/5 relative">
                 <button

@@ -8,6 +8,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { TbSeeding } from "react-icons/tb";
 import { ReactComponent as AppLogo } from "../assets/applogo.svg";
 import { useLanguage } from "../LanguageContext";
+import Cookies from "js-cookie";
 
 function SideBar() {
   const [activeLink, setActiveLink] = useState(null);
@@ -17,13 +18,16 @@ function SideBar() {
   const location = useLocation();
 
   const handleLinkClick = (index) => {
+    if (index === 4){
+      Cookies.remove("jwt");
+    }
     setActiveLink(index === activeLink ? null : index);
   };
   
 
   const renderLink = (to, enText, arText, icon, index) => {
     const isActive = index === activeLink;
-  
+   
     return (
       <Link
         to={to}
