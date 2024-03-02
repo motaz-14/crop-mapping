@@ -26,6 +26,7 @@ function Login() {
         });
         if (response.status == 200){
           Cookies.set("jwt",response.data.token);
+          Cookies.set("role" , response.data.user.role);
         }
         window.location.pathname = "/dashboard";
         setError(""); // da 34an lw msh empty

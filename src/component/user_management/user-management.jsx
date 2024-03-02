@@ -10,6 +10,7 @@ function UserManagement() {
   const membersPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
   const [members , setMembers] = useState([]);
+  const [admin , setAdmin] = useState([]);
   const [totalMembers , setTotalMembers] = useState(0);
   const [totalPages , setTotalPages] = useState(0);
  
@@ -55,14 +56,18 @@ function UserManagement() {
     <>
       <div>
         <div className="w-[700px] bg-transparentColor flex flex-row gap-2 ml-6">
-          <div className="bg-white rounded-t-lg flex flex-row justify-center text-center mb-2 w-1/3 gap-7 p-4">
-            <div className="text-primaryColor flex flex-row justify-center items-center font-semibold text-center ">
-              Members
-            </div>
-            <div className="text-secondaryColor flex flex-row justify-center items-center font-semibold text-center">
-              Admins
-            </div>
-          </div>
+      {Cookies.get("role") === "Admin" && (
+    <div className="bg-white rounded-t-lg flex flex-row justify-center text-center mb-2 w-1/3 gap-7 p-4">
+      <div className="text-primaryColor flex flex-row justify-center items-center font-semibold text-center ">
+        Members
+      </div>
+      <div className="text-secondaryColor flex flex-row justify-center items-center font-semibold text-center">
+        Admins
+      </div>
+    </div>
+
+    )}
+
 
           <div className="flex flex-col items-center justify-center overflow-hidden">
             <div className="flex gap-2">
