@@ -24,7 +24,7 @@ function Login() {
           username:email,
           password,
         });
-        if (response.status == 200){
+        if (response.status === 200){
           Cookies.set("jwt",response.data.token);
           Cookies.set("role" , response.data.user.role);
         }

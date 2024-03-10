@@ -6,6 +6,7 @@ import { useLanguage } from "../LanguageContext";
 
 function Navbar() {
   const [showNotifications, setShowNotifications] = useState(false);
+  // eslint-disable-next-line 
   const [search, setSearch] = useState("");
   const [currentTime, setCurrentTime] = useState(new Date());
   const { getText, language } = useLanguage(); // Import getText and language from the LanguageContext
@@ -60,27 +61,28 @@ function Navbar() {
         </div>
 
         {/* Notification and Avatar */}
-        <div className="w-[330px] flex items-center justify-end">
+        <div className="w-[330px] flex items-center gap-4 justify-end">
           {/* Notification*/}
           <div
-            className="relative mr-7 cursor-pointer"
+            className="relative cursor-pointer"
             onClick={toggleNotifications}
           >
             {showNotifications ? (
               <>
               <HiOutlineBell className="bg-white text-secondaryColor cursor-pointer" />
-              <div className="absolute top-8 cursor-pointer right-0 bg-white shadow-md rounded-md p-2 w-80">
+              <div className={`absolute top-8 cursor-pointer ${language ==="en" ?"right-0":"left-0"} bg-white shadow-md rounded-md p-2 w-80`}>
                 <p
-                  style={{ textAlign: language === "en" ? "left" : "right" }}
                 >
                   {getText(
                     "I am a The first notif I am a notification I am a notification I am a notification",
                     "انا رسالة"
                   )}
                 </p>
-                <hr className="bg-secondaryColor" />
+                
+                <div className="bg-primaryColor w-full h-[2px]">
+                </div>
+                
                 <p
-                  style={{ textAlign: language === "en" ? "left" : "right" }}
                 >
                   {getText(
                     "I am a The first notif I am a notification I am a notification I am a notification",

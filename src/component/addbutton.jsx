@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import Member from '../component/pop_up_pages/member';
-import Assumption from '../component/pop_up_pages/assumption';
+import { Link, useLocation } from 'react-router-dom';
 
-export default function Addbutton() {
+export default function AddButton() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const location = useLocation();
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    console.log(`Selected option: ${option}`);
+  const handleOptionClick = () => {
     setIsDropdownOpen(false);
   };
-  
+
   return (
     <div className="relative">
       <button
@@ -30,22 +27,26 @@ export default function Addbutton() {
       </button>
       {isDropdownOpen && (
         <div className="absolute top-8 left-0 right-0 p-4 w-40 bg-white border-none outline-none rounded-2xl">
-          <button
-            className="cursor-pointer block w-full mb-2 text-center p-2 px-10 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-md outline-none border-none"
-            onClick={() => handleOptionClick('Member')}
-          >
-            Member
-          </button>
-          <button
-            className="block w-full cursor-pointer text-center p-2 px-10 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-md outline-none border-none"
-            onClick={() => handleOptionClick('Assumption')}
-          >
-            Assumption
-          </button>
+          {location.pathname === "/dashboard/assumption" && (
+            <Link
+              to={"create-assumption"}
+              className="block w-full no-underline cursor-pointer text-center py-2 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-md outline-none border-none"
+              onClick={() => handleOptionClick('Assumption')}
+            >
+              Assumption
+            </Link>
+          )}
+          {location.pathname === "/dashboard/user-management" && (
+            <Link
+              to={"member"}
+              className="block w-full no-underline cursor-pointer text-center py-2 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-md outline-none border-none"
+              onClick={() => handleOptionClick('Member')}
+            >
+              Member
+            </Link>
+          )}
         </div>
       )}
-      {selectedOption === 'Member' && <Member closeModal={setSelectedOption}/>}
-      {selectedOption === 'Assumption' && <Assumption closeModal={setSelectedOption}/>}
     </div>
   );
 }

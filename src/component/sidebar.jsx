@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { IoPersonSharp } from "react-icons/io5";
-import { CiSettings } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { TbSeeding } from "react-icons/tb";
+import { IoAnalyticsOutline } from "react-icons/io5";
 import { ReactComponent as AppLogo } from "../assets/applogo.svg";
 import { useLanguage } from "../LanguageContext";
 import Cookies from "js-cookie";
@@ -68,13 +68,19 @@ function SideBar() {
           1
         )}
         {renderLink(
+          "assumption",
+          "Assumption",
+          "افتراض",
+          <IoAnalyticsOutline />,
+          2
+        )}
+        {renderLink(
           "seeds-details",
           "Seeds Details",
           "تفاصيل البذور",
           <TbSeeding />,
-          2
+          3
         )}
-        {renderLink("settings", "Settings", "الإعدادات", <CiSettings />, 3)}
         {renderLink("/", "Logout", "تسجيل الخروج", <IoIosLogOut />, 4)}
       </nav>
       <div className="mt-4 ml-7">

@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'jit',
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   corePlugins: { preflight: false },
   theme: {
@@ -18,5 +19,9 @@ module.exports = {
       'not-violated-text': '#ffff',
     },
     extend: {},
+  },
+  direction: {
+    // Add RTL support
+    rtl: 'rtl',
   },
 };
