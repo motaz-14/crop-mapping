@@ -1,18 +1,78 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function NewAssumption() {
   const [selectedSeed, setSelectedSeed] = useState(null);
   const [selectedMember, setSelectedMember] = useState(null);
-  const [status, setStatus] = useState("pending");
-
-  const seeds = ["Seed 1", "Seed 2"];
-  const members = ["members 1", "members 2"];
-
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [status, setStatus] = useState("pending");  
+  const [members,setMembers] = useState([]);
+  const [seeds,setSeeds] = useState([]);
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+  const handleSave = async ()=>{
+    try {
+      const response = await axios.post("http://localhost:8080/api/assumption/",{
+        startDate:selectedDate,
+        plantId:selectedSeed,
+        farmerId:selectedMember,
+        latlungs:latlungs
+      }, {
+        headers: {
+          authorization: `Bearer ${Cookies.get("jwt")}`,
+        },
+      });
+      if (response.status === 201){
+        alert("Created");
+      }
+     
+    
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const getFarmers = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/farmer/", {
+        headers: {
+          authorization: `Bearer ${Cookies.get("jwt")}`,
+        },
+      });
+      console.log(response);
+      setMembers(response.data.farmers);
+    
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getSeeds = async ()=>{
+    try {
+      const response = await axios.get("http://localhost:8080/api/plant",{
+        headers:{
+          "authorization" : `Bearer ${Cookies.get("jwt")}`
+        }
+      });
+      setSeeds(response.data.plants);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  useEffect(()=>{
+    async function fetchData() {
+      await getFarmers();
+      await getSeeds();
+    }
+    fetchData();
+  },[])
   const handleSeedSelect = (seed) => {
     setSelectedSeed(seed);
   };
@@ -34,6 +94,10 @@ function NewAssumption() {
     setLatlungs(e.layer._latlngs[0]);
     setSelectedArea([[ne.lat, ne.lng], [sw.lat, sw.lng]]); 
   };
+  const clearSelection = () => {
+    setLatlungs([]);
+    setSelectedArea([]);
+  };
  
   return (
     <>
@@ -50,7 +114,7 @@ function NewAssumption() {
               handleSelection(e);
             }}
             onDeleted={()=>{
-              setLatlungs([]);
+              clearSelection();
             }}
             
             draw={{
@@ -74,8 +138,8 @@ function NewAssumption() {
                   Select a member
                 </option>
                 {members.map((member) => (
-                  <option key={member} value={member}>
-                    {member}
+                  <option key={member.id} value={member.id}>
+                    {member.name}  {member.nationalId}
                   </option>
                 ))}
               </select>
@@ -100,8 +164,8 @@ function NewAssumption() {
                   Select a seed
                 </option>
                 {seeds.map((seed) => (
-                  <option key={seed} value={seed}>
-                    {seed}
+                  <option key={seed.id} value={seed.id}>
+                    {seed.name}
                   </option>
                 ))}
               </select>
@@ -135,10 +199,13 @@ function NewAssumption() {
             </div>
             
             </div>
-            
+            <div className="flex justify-center items-center text-center">
+              <label>Select a date:</label>
+              <input type="date" value={selectedDate} onChange={handleDateChange} />
+            </div>
             
             <div className="flex w-full mt-32 items-center justify-center">
-              <button className="cursor-pointer items-center font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
+              <button onClick={handleSave} className="cursor-pointer items-center font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
                 Save
               </button>
             </div>

@@ -49,7 +49,7 @@ function Dashboard() {
             <Route path="seeds-details" element={<SeedsDetails />} />
             <Route path="assumption" element={<Assumption/>} />
             <Route path="map" element={<MapComponent/>} />
-            <Route path="user-management/profile-member" element={<ProfileMember/>}/>
+            <Route path="user-management/profile-member/:id" element={<ProfileMember/>}/>
             <Route path="user-management/member" element={<Member/>} />
             <Route path="seeds-details/fertilizer-calculator" element={<FertilizerCalculator />} />
             <Route path="assumption/create-assumption" element={<NewAssumption/>} />
