@@ -112,7 +112,7 @@ function Assumption() {
                     {assumption.id}
                   </div>
                   <div className="py-4 text-center font-semibold text-[15px] w-1/5 text-secondaryColor">
-                    Tomatoes
+                    {assumption.farmerAssumption.name}
                   </div>
                   <div className="text-secondaryColor font-bold text-[14px] text-center w-1/5">
                 <div
