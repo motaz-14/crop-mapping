@@ -5,6 +5,8 @@ import UserManagementBtns from "../user_management/usermanagment-btns";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useLanguage } from "../../LanguageContext"; 
+import FromMapBtn from "../from_map/from-map-btn";
+import { Link } from "react-router-dom";
 
 function Assumption() {
   const membersPerPage = 7;
@@ -128,18 +130,18 @@ function Assumption() {
               </div>
               <div className="py-4 flex items-center justify-center w-1/5">
                 <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
-                  <i className="text-primaryColor">
-                    <FiEdit size={15} />
-                  </i>
+                  <Link to={"edit-assumption"} >
+                    <i className="text-primaryColor">
+                      <FiEdit size={15} />
+                    </i>
+                  </Link>
                 </button>
                 <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
                   <i className="text-primaryColor">
                     <FaRegTrashAlt size={15} />
                   </i>
                 </button>
-                <button className="cursor-pointer font-semibold text-center py-1 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-lg outline-none border-none">
-                  {getText("From Map", "من الخريطة")}
-                </button>
+                <FromMapBtn/>
               </div>
             </div>
           ))}

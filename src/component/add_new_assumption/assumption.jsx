@@ -11,7 +11,6 @@ function NewAssumption() {
   const [selectedSeed, setSelectedSeed] = useState(null);
   const [selectedMember, setSelectedMember] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [status, setStatus] = useState("pending");  
   const [members,setMembers] = useState([]);
   const [seeds,setSeeds] = useState([]);
   const handleDateChange = (e) => {
@@ -79,9 +78,6 @@ function NewAssumption() {
   const handleMemberSelect = (member) => {
     setSelectedMember(member);
   };
-  const handleStatusChange = (newStatus) => {
-    setStatus(newStatus);
-  };
   // eslint-disable-next-line
   const [selectedArea, setSelectedArea] = useState([]);
   // eslint-disable-next-line
@@ -132,7 +128,7 @@ function NewAssumption() {
       <select
                 value={selectedMember || ''}
                 onChange={(e) => handleMemberSelect(e.target.value)}
-                className="inline-flex justify-center items-center w-full px-4 py-2 bg-[#EAE8E8] text-sm font-medium text-secondaryColor rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                className="inline-flex justify-center items-center w-full px-4 py-2 bg-white text-sm font-medium text-primaryColor rounded-md focus:outline-none focus:ring focus:border-blue-300"
               >
                 <option value="" disabled>
                   Select a member
@@ -158,7 +154,7 @@ function NewAssumption() {
               <select
                 value={selectedSeed || ''}
                 onChange={(e) => handleSeedSelect(e.target.value)}
-                className="inline-flex justify-center items-center w-full px-4 py-2 bg-[#EAE8E8] text-sm font-medium text-secondaryColor rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                className="inline-flex justify-center items-center w-full px-4 py-2 bg-white text-sm font-medium text-primaryColor rounded-md focus:outline-none focus:ring focus:border-blue-300"
               >
                 <option value="" disabled>
                   Select a seed
@@ -170,34 +166,6 @@ function NewAssumption() {
                 ))}
               </select>
             </div>
-
-            <div className="">
-              <div className="flex flex-row gap-5">
-                <div className="flex justify-center items-center text-center">
-                  <input id="pending" type="radio"
-                    checked={status === "pending"}
-                    onChange={() => handleStatusChange("pending")}
-                  />
-                  <label className="text-secondaryColor text-sm" htmlFor="pending">Pending</label>
-                </div>
-                <div className="flex justify-center">
-                  <input id="true" type="radio"
-                    checked={status === "true"}
-                    onChange={() => handleStatusChange("true")}
-                  />
-                  <label className="text-secondaryColor text-sm" htmlFor="true">True</label>
-                </div>
-                <div className="flex justify-center">
-                  <input
-                    checked={status === "false"}
-                    onChange={() => handleStatusChange("false")}
-                    id="false" type="radio"
-                  />
-                  <label className="text-secondaryColor text-sm" htmlFor="false">False</label>
-                </div>
-              </div>
-            </div>
-            
             </div>
             <div className="flex justify-center items-center text-center mt-5">
               <label>Select a date:</label>

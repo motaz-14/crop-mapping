@@ -84,7 +84,7 @@ function UserManagement() {
             {getText("Member Name", "اسم العضو")}
           </div>
           <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
-            {getText("Mobile Number ID", "رقم الهاتف المحمول")}
+            {getText("Mobile Number", "الهاتف المحمول")}
           </div>
           <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
             {getText("Status", "الحالة")}
@@ -133,18 +133,22 @@ function UserManagement() {
               </div>
               <div className="flex items-center justify-center w-1/5">
                 <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
-                  <Link to={`profile-member/${member.id}`} >
+                  <Link to={`profile-member/${member.id}`}>
                     <i className="text-primaryColor">
                       <VscEye size={15} />
                     </i>
                   </Link>
                 </button>
                 <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
-                  <i className="text-primaryColor">
-                    <FiEdit size={15} />
-                  </i>
+                  <Link to={"edit-member"}>
+                    <i className="text-primaryColor">
+                      <FiEdit size={15} />
+                    </i>
+                  </Link>
                 </button>
-                <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
+                <button
+                  className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor"
+                >
                   <i className="text-primaryColor">
                     <FaRegTrashAlt size={15} />
                   </i>
@@ -161,7 +165,8 @@ function UserManagement() {
           <span className="font-extrabold">{getText("Back", "رجوع")}</span>
         </button>
         <span className="mx-4 text-secondaryColor">
-          {getText("Page", "الصفحة")} {currentPage} {getText("of", "من")} {totalPages}
+          {getText("Page", "الصفحة")} {currentPage} {getText("of", "من")}{" "}
+          {totalPages}
         </span>
         <button
           className="cursor-pointer font-semibold text-center p-2 px-10 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-lg outline-none border-none"

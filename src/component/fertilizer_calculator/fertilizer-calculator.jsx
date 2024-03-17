@@ -46,10 +46,6 @@ function FertilizerCalculator() {
           <span className="mx-4 text-secondaryColor">
             Fertilizer Calculator
           </span>
-          <Link className="cursor-pointer no-underline font-semibold text-center p-2 px-10 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-lg outline-none border-none">
-            <div></div>
-            <div className="text-sm">Seeds</div>
-          </Link>
         </div>
         <div className="w-full flex flex-row gap-4">
           <div className="bg-white w-2/5 p-4 flex flex-col gap-4 rounded-md">

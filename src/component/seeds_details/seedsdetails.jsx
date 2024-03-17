@@ -132,9 +132,11 @@ function SeedsDetails() {
                   className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor"
                   onClick={() => handleToggleDropdown(index)}
                 >
+                  <Link to={"edit-seeds"}>
                   <i className="text-primaryColor">
                     <FiEdit size={15} />
                   </i>
+                  </Link>
                 </button>
                 {showDropdown[index] && (
                   <div className="absolute left-[150px] top-0 bg-white p-4 border rounded text-start">

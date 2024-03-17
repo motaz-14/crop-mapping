@@ -16,6 +16,10 @@ import Assumption from "../component/assumption_page/assumptionPage";
 import ProfileMember from "../component/profile_member/profile_member";
 import { useLanguage } from "../LanguageContext";
 import NewSeeds from "../component/add_new_seeds/newseeds";
+import EditMember from "../component/edit_member_page/edit-member";
+import FromMap from "../component/from_map/from-map";
+import EditAssumption from "../component/edit-assumption/edit_assumption";
+import EditSeed from "../component/edit_seed/edit-seed";
 
 function Dashboard() {
   useEffect(() => {
@@ -47,14 +51,18 @@ function Dashboard() {
           <Routes>
             <Route path="/*" element={<MainContent />} />
             <Route path="user-management" element={<UserManagement />} />
-            <Route path="seeds-details" element={<SeedsDetails />} />
-            <Route path="assumption" element={<Assumption/>} />
-            <Route path="map" element={<MapComponent/>} />
             <Route path="user-management/profile-member/:id" element={<ProfileMember/>}/>
             <Route path="user-management/member" element={<Member/>} />
-            <Route path="seeds-details/fertilizer-calculator" element={<FertilizerCalculator />} />
+            <Route path="user-management/edit-member" element={<EditMember/>} />
+            <Route path="assumption" element={<Assumption/>} />
             <Route path="assumption/create-assumption" element={<NewAssumption/>} />
+            <Route path="assumption/edit-assumption" element={<EditAssumption/>} />
+            <Route path="seeds-details" element={<SeedsDetails />} />
+            <Route path="seeds-details/fertilizer-calculator" element={<FertilizerCalculator />} />
             <Route path="seeds-details/new-seeds" element={<NewSeeds/>} />
+            <Route path="seeds-details/edit-seeds" element={<EditSeed/>} />
+            <Route path="map" element={<MapComponent/>} />
+            <Route path="user-map" element={<FromMap/>} />
           </Routes>
         </div>
         <Link
