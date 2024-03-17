@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '../LanguageContext'; 
 
 export default function AddButton() {
+  const { getText } = useLanguage(); 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
 
@@ -23,7 +25,7 @@ export default function AddButton() {
         <div>
           <FaPlus size={12} />
         </div>
-        <div>Add new</div>
+        <div>{getText('Add new', 'إضافة جديدة')}</div> {/* Translate "Add new" */}
       </button>
       {isDropdownOpen && (
         <div className="absolute top-8 left-0 right-0 p-4 w-40 bg-white border-none outline-none rounded-2xl">
@@ -33,7 +35,7 @@ export default function AddButton() {
               className="block w-full no-underline cursor-pointer text-center py-2 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-md outline-none border-none"
               onClick={() => handleOptionClick('Assumption')}
             >
-              Assumption
+              {getText('Assumption', 'افتراض')} {/* Translate "Assumption" */}
             </Link>
           )}
           {location.pathname === "/dashboard/user-management" && (
@@ -42,7 +44,7 @@ export default function AddButton() {
               className="block w-full no-underline cursor-pointer text-center py-2 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-md outline-none border-none"
               onClick={() => handleOptionClick('Member')}
             >
-              Member
+              {getText('Member', 'عضو')} {/* Translate "Member" */}
             </Link>
           )}
           {location.pathname === "/dashboard/seeds-details" && (
@@ -51,7 +53,7 @@ export default function AddButton() {
               className="block w-full no-underline cursor-pointer text-center py-2 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-md outline-none border-none"
               onClick={() => handleOptionClick('Seeds')}
             >
-              Seeds
+              {getText('Seeds', 'بذور')} {/* Translate "Seeds" */}
             </Link>
           )}
         </div>

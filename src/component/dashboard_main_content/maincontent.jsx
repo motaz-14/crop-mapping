@@ -34,6 +34,7 @@ function MainContent() {
     { name: "Nov", value: 30 },
     { name: "Dec", value: 30 },
   ];
+  
   //eslint-disable-next-line
   const [selectedDate, setSelectedDate] = useState(null);
 
@@ -79,9 +80,9 @@ function MainContent() {
       {/* 3. BarChart - Crop Statistics */}
       <div className="container mx-auto py-4">
         <div className="flex justify-between">
-          <div className="w-full lg:w-3/4 bg-white p-5 rounded-2xl flex flex-col gap-5">
+          <div className="w-full bg-white p-2 rounded-2xl flex flex-col gap-5">
             <label className="font-[Spartan] font-bold text-[20px] text-secondaryColor ml-9">
-              Crop Statistics
+            {getText("Crop Statistics", "إحصائيات المحصول")}
             </label>
             <BarChart width={900} height={300} data={barChartData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -92,7 +93,7 @@ function MainContent() {
               <Bar dataKey="value" fill="#01B68D" barSize={30} />
             </BarChart>
           </div>
-          <div className="w-full h-24 lg:w-1/4 lg:ml-4">
+          <div className="w-full h-24">
             <MostSeeds />
           </div>
         </div>

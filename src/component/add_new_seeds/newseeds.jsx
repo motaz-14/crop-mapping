@@ -6,11 +6,9 @@ function NewSeeds() {
 
   const handleFertilizerQuanChange = (event) => {
     const inputValue = event.target.value;
-    // Check if the input value is a number
     if (!isNaN(inputValue)) {
       setFertilizerQuan(inputValue);
     } else {
-      // If input value is not a number, clear the input field
       setFertilizerQuan("");
     }
   };

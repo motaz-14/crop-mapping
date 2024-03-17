@@ -6,8 +6,10 @@ import UserManagementBtns from "../user_management/usermanagment-btns";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../LanguageContext";
 
 function UserManagement() {
+  const { getText } = useLanguage(); // Import getText function from the LanguageContext
   const membersPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
   const [members, setMembers] = useState([]);
@@ -38,6 +40,7 @@ function UserManagement() {
     }
     fetchData();
   }, []);
+
   const handleClickNext = () => {
     setCurrentPage((prevPage) =>
       prevPage < totalPages ? prevPage + 1 : prevPage
@@ -47,6 +50,7 @@ function UserManagement() {
   const handleClickBack = () => {
     setCurrentPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
   };
+
   return (
     <>
       <div>
@@ -54,10 +58,10 @@ function UserManagement() {
           {Cookies.get("role") === "Admin" && (
             <div className="bg-white rounded-t-lg flex flex-row justify-center text-center mb-2 w-1/3 gap-7 p-4">
               <div className="text-primaryColor flex flex-row justify-center items-center font-semibold text-center ">
-                Members
+                {getText("Members", "الأعضاء")}
               </div>
               <div className="text-secondaryColor flex flex-row justify-center items-center font-semibold text-center">
-                Admins
+                {getText("Admins", "المسؤولون")}
               </div>
             </div>
           )}
@@ -71,22 +75,22 @@ function UserManagement() {
         {/* header */}
         <div className="flex justify-center items-center gap-2">
           <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
-            National ID
+            {getText("National ID", "الهوية الوطنية")}
           </div>
           <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
-            Photo
+            {getText("Photo", "الصورة")}
           </div>
           <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
-            Member Name
+            {getText("Member Name", "اسم العضو")}
           </div>
           <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
-            Mobile Number ID
+            {getText("Mobile Number ID", "رقم الهاتف المحمول")}
           </div>
           <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5">
-            Status
+            {getText("Status", "الحالة")}
           </div>
           <div className="p-4 text-center font-semibold text-[15px] bg-primaryColor text-white w-1/5 rounded-tr-2xl">
-            Operations
+            {getText("Operations", "العمليات")}
           </div>
         </div>
 
@@ -154,16 +158,16 @@ function UserManagement() {
           className="cursor-pointer font-semibold text-center p-2 px-10 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-lg outline-none border-none"
           onClick={handleClickBack}
         >
-          <span className="font-extrabold">Back</span>
+          <span className="font-extrabold">{getText("Back", "رجوع")}</span>
         </button>
         <span className="mx-4 text-secondaryColor">
-          Page {currentPage} of {totalPages}
+          {getText("Page", "الصفحة")} {currentPage} {getText("of", "من")} {totalPages}
         </span>
         <button
           className="cursor-pointer font-semibold text-center p-2 px-10 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-lg outline-none border-none"
           onClick={handleClickNext}
         >
-          <span className="font-extrabold">Next</span>
+          <span className="font-extrabold">{getText("Next", "التالي")}</span>
         </button>
       </div>
     </>

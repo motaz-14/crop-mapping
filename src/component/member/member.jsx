@@ -2,12 +2,15 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CiExport } from "react-icons/ci";
+import { useLanguage } from "../../LanguageContext"; 
 
 function Member({ closeModal }) {
   const [firstName,setFirstName] = useState("");
   const [lastName,setLastName] = useState("");
   const [nationalId,setNationalId] = useState("");
   const [phone,setPhone] = useState("");
+  const { getText } = useLanguage();
+  
   const handleSave = async ()=>{
     try {
       if (firstName&&lastName&&nationalId&&phone){
@@ -30,7 +33,7 @@ function Member({ closeModal }) {
     <>
         <div className="flex flex-row items-center w-11/12 h-1/2 bg-white rounded-2xl">
           <div className="w-1/2 flex flex-col">
-            <h2 className="text-secondaryColor font-bold ml-5">Add New Member </h2>
+            <h2 className="text-secondaryColor font-bold m-5">{getText("Add New Member", "إضافة عضو جديد")}</h2>
             <div className="flex flex-row gap-2">
               <div className="p-4 rounded-lg">
                 <div class="relative">
@@ -48,7 +51,8 @@ function Member({ closeModal }) {
                     for="first-name"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
-                    First Name
+                    {getText("First Name", "اسمك")}
+
                   </label>
                 </div>
               </div>
@@ -68,7 +72,7 @@ function Member({ closeModal }) {
                     for="last-name"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
-                    Last Name
+                    {getText("Last Name", "اسم العائلة")}
                   </label>
                 </div>
               </div>
@@ -90,7 +94,8 @@ function Member({ closeModal }) {
                     for="nation-id"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
-                    Nation ID
+                    {getText("Nation ID  ", "البطاقة")}
+
                   </label>
                 </div>
               </div>
@@ -110,20 +115,21 @@ function Member({ closeModal }) {
                     for="mobile-number"
                     className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                   >
-                    Mobile Number
+                   {getText("Mobile Number", "رقم الهاتف")}
+
                   </label>
                 </div>
               </div>
               
             </div>
             
-            <div className="flex flex-row gap-2 ml-4 mt-6">
+            <div className="flex flex-row gap-2 m-4 mt-6">
               <div>
                 <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
                   <div>
                     <CiExport size={14} />
                   </div>
-                  <div>Upload Farmer Card</div>
+                  <div>{getText("Upload Farmer Card", "تحميل بطاقة المزارع")}</div>
                 </button>
               </div>
               <div>
@@ -131,14 +137,14 @@ function Member({ closeModal }) {
                   <div>
                     <CiExport size={14} />
                   </div>
-                  <div>Upload photo</div>
+                  <div>{getText("Upload photo", "حمل الصورة")}</div>
                 </button>
                 
               </div>
               <button
                 onClick={async()=>{ await handleSave();}}
                  className="cursor-pointer font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
-                  <div>Save</div>
+                  <div>{getText("Save", "حفظ")}</div>
                 </button>
             </div>
           </div>
