@@ -1,6 +1,27 @@
 import { Line } from "react-chartjs-2";
 import { useLanguage } from "../../LanguageContext"; 
-
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend,
+} from "chart.js";
+// Register ChartJS components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend
+);
 function MyChart() {
   // eslint-disable-next-line
   const { getText } = useLanguage(); 
@@ -9,7 +30,7 @@ function MyChart() {
   const falseLabel = getText("False", "غلط");
 
   const labels = [
-    getText("Jan", "يناير"),
+  getText("Jan", "يناير"),
   getText("Feb", "فبراير"),
   getText("Mar", "مارس"),
   getText("Apr", "أبريل"),
