@@ -48,7 +48,7 @@ function MainContent() {
         <Card
           icon={GrAnnounce}
           styles="text-white text-2xl bg-[#FFD60A] p-4 rounded-2xl"
-          text={getText("Total Checks", "مجموع الخرا")}
+          text={getText("Total Checks", "مجموع ")}
           value={getText("3,782 Times", "3,782 عدد")}
           description={getText("7.2% More than last month", "اكثر من الشهر الفات")}
         />

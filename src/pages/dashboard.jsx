@@ -15,6 +15,7 @@ import NewAssumption from "../component/add_new_assumption/assumption";
 import Assumption from "../component/assumption_page/assumptionPage";
 import ProfileMember from "../component/profile_member/profile_member";
 import { useLanguage } from "../LanguageContext";
+import NewSeeds from "../component/add_new_seeds/newseeds";
 
 function Dashboard() {
   useEffect(() => {
@@ -53,6 +54,7 @@ function Dashboard() {
             <Route path="user-management/member" element={<Member/>} />
             <Route path="seeds-details/fertilizer-calculator" element={<FertilizerCalculator />} />
             <Route path="assumption/create-assumption" element={<NewAssumption/>} />
+            <Route path="seeds-details/new-seeds" element={<NewSeeds/>} />
           </Routes>
         </div>
         <Link

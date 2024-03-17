@@ -45,6 +45,15 @@ export default function AddButton() {
               Member
             </Link>
           )}
+          {location.pathname === "/dashboard/seeds-details" && (
+            <Link
+              to={"new-seeds"}
+              className="block w-full no-underline cursor-pointer text-center py-2 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-md outline-none border-none"
+              onClick={() => handleOptionClick('Seeds')}
+            >
+              Seeds
+            </Link>
+          )}
         </div>
       )}
     </div>

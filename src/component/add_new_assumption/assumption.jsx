@@ -199,7 +199,7 @@ function NewAssumption() {
             </div>
             
             </div>
-            <div className="flex justify-center items-center text-center">
+            <div className="flex justify-center items-center text-center mt-5">
               <label>Select a date:</label>
               <input type="date" value={selectedDate} onChange={handleDateChange} />
             </div>
