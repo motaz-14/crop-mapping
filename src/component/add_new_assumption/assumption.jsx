@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 function NewAssumption() {
   const [selectedSeed, setSelectedSeed] = useState(null);
   const [selectedMember, setSelectedMember] = useState(null);
+  const [nationalId, setnationalId] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [members,setMembers] = useState([]);
   const [seeds,setSeeds] = useState([]);
@@ -18,11 +19,15 @@ function NewAssumption() {
   };
   const handleSave = async ()=>{
     try {
+      const searchObject = selectedMember!=null?
+      {farmerId:selectedMember}:
+      {nationalId:nationalId};
+      
       const response = await axios.post("http://localhost:8080/api/assumption/",{
         startDate:selectedDate,
         plantId:selectedSeed,
-        farmerId:selectedMember,
-        latlungs:latlungs
+        latlungs:latlungs,
+        ...searchObject,
       }, {
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
@@ -31,8 +36,6 @@ function NewAssumption() {
       if (response.status === 201){
         alert("Created");
       }
-     
-    
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +74,8 @@ function NewAssumption() {
       await getSeeds();
     }
     fetchData();
-  },[])
+  },[]);
+  
   const handleSeedSelect = (seed) => {
     setSelectedSeed(seed);
   };
@@ -140,6 +144,11 @@ function NewAssumption() {
                   </option>
                 ))}
               </select>
+              <label className="flex p-2 items-center text-center mt-5">OR</label>
+              <div className="flex  items-center text-center mt-5">
+              <label>national ID: </label>
+              <input type="text" value={nationalId} onChange={(e)=>{setnationalId(e.target.value);}} />
+            </div>
       </div>
         </div>
         

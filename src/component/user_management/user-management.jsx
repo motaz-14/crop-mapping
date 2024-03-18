@@ -15,6 +15,7 @@ function UserManagement() {
   const [members, setMembers] = useState([]);
   // eslint-disable-next-line
   const [admin, setAdmin] = useState([]);
+  const [deleted,setDeleted] = useState(false);
   // eslint-disable-next-line
   const [totalMembers, setTotalMembers] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -34,13 +35,34 @@ function UserManagement() {
       console.log(error);
     }
   };
+  const deleteFarmer = async (id)=>{
+    try {
+      const response = await axios.delete(`http://localhost:8080/api/farmer/${id}`,{
+        headers: {
+          authorization: `Bearer ${Cookies.get("jwt")}`,
+        },
+      });
+      setDeleted(!deleted);
+     
+      console.log(response);
+  
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
   useEffect(() => {
     async function fetchData() {
       await getFarmers();
     }
     fetchData();
-  }, []);
-
+  }, [deleted]);
+  useEffect(() => {
+    // Compare pages here
+    if (Math.ceil(members.length / membersPerPage) < currentPage) {
+      handleClickBack();
+    }
+  }, [members, currentPage, membersPerPage]);
   const handleClickNext = () => {
     setCurrentPage((prevPage) =>
       prevPage < totalPages ? prevPage + 1 : prevPage
@@ -149,7 +171,7 @@ function UserManagement() {
                 <button
                   className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor"
                 >
-                  <i className="text-primaryColor">
+                  <i className="text-primaryColor" onClick={()=>deleteFarmer(member.id)}>
                     <FaRegTrashAlt size={15} />
                   </i>
                 </button>
