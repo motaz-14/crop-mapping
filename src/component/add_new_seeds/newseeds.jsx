@@ -1,9 +1,32 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CiExport } from "react-icons/ci";
 
 function NewSeeds() {
   const [fertilizerQuan, setFertilizerQuan] = useState("");
-
+  const [name,setName] = useState("");
+  const [desc,setDesc] = useState("");
+  const [fert,setFert] = useState("");
+  const handleSave = async ()=>{
+    try {
+      const response = await axios.post("http://localhost:8080/api/plant/",{
+        "name":name,
+        "fertlizerConsumption" : fertilizerQuan,
+      }, {
+        headers: {
+          authorization: `Bearer ${Cookies.get("jwt")}`,
+        },
+      });
+      if (response.status === 201){
+        alert("Created");
+      }
+     
+    
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const handleFertilizerQuanChange = (event) => {
     const inputValue = event.target.value;
     if (!isNaN(inputValue)) {
@@ -26,6 +49,7 @@ function NewSeeds() {
                   name="first-name"
                   className="peer bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent px-2 ring-secondaryColor focus:outline-none border border-secondaryColor focus:border-secondaryColor"
                   placeholder=""
+                  onChange={(e)=>{setName(e.target.value);}}
                 />
                 <label
                   for="first-name"
@@ -43,6 +67,7 @@ function NewSeeds() {
                   name="last-name"
                   className="peer bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent px-2 ring-white focus:outline-none border border-[#666666] focus:border-[#666666]"
                   placeholder=""
+                  onChange={(e)=>{setDesc(e.target.value);}}
                 />
                 <label
                   for="last-name"
@@ -62,6 +87,7 @@ function NewSeeds() {
                   name="nation-id"
                   className="peer bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent px-2 ring-white focus:outline-none border border-[#666666] focus:border-[#666666]"
                   placeholder=""
+                  onChange={(e)=>{setFert(e.target.value);}}
                 />
                 <label
                   for="nation-id"
@@ -94,14 +120,6 @@ function NewSeeds() {
 
           <div className="flex flex-row gap-2 ml-4 mt-6">
             <div>
-              <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
-                <div>
-                  <CiExport size={14} />
-                </div>
-                <div>Upload Farmer Card</div>
-              </button>
-            </div>
-            <div>
               <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white  rounded-lg outline-none border-primaryColor border">
                 <div>
                   <CiExport size={14} />
@@ -109,7 +127,7 @@ function NewSeeds() {
                 <div>Upload photo</div>
               </button>
             </div>
-            <button className="cursor-pointer font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
+            <button onClick={handleSave} className="cursor-pointer font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
               <div>Save</div>
             </button>
           </div>

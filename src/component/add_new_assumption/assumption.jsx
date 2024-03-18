@@ -88,6 +88,7 @@ function NewAssumption() {
     const ne = bounds.getNorthEast();
     const sw = bounds.getSouthWest();
     setLatlungs(e.layer._latlngs[0]);
+    console.log(e.layer);
     setSelectedArea([[ne.lat, ne.lng], [sw.lat, sw.lng]]); 
   };
   const clearSelection = () => {

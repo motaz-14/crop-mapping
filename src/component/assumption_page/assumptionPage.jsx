@@ -14,7 +14,7 @@ function Assumption() {
   const [assumptions, setAssumptions] = useState([]);
   // eslint-disable-next-line
   const [totalMembers, setTotalMembers] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const { getText } = useLanguage(); 
 
   const getAssumptions = async () => {
@@ -26,8 +26,8 @@ function Assumption() {
       });
       console.log(response);
       setAssumptions(response.data.assumptions);
-      setTotalMembers(response.data.farmers.length);
-      setTotalPages(Math.ceil(response.data.farmers.length / membersPerPage));      
+      setTotalMembers(response.data.assumptions.length);
+      setTotalPages(Math.ceil(response.data.assumptions.length / membersPerPage));      
     } catch (error) {
       console.log(error);
     }
@@ -141,7 +141,7 @@ function Assumption() {
                     <FaRegTrashAlt size={15} />
                   </i>
                 </button>
-                <FromMapBtn/>
+                <FromMapBtn id={assumption.id}   />
               </div>
             </div>
           ))}

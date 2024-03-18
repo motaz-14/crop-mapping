@@ -140,7 +140,7 @@ function UserManagement() {
                   </Link>
                 </button>
                 <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
-                  <Link to={"edit-member"}>
+                  <Link to={`edit-member/${member.id}`}>
                     <i className="text-primaryColor">
                       <FiEdit size={15} />
                     </i>

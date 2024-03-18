@@ -104,7 +104,7 @@ function ProfileMember() {
                     <FaRegTrashAlt size={15} />
                   </i>
                 </button>
-                <FromMapBtn/>
+                <FromMapBtn id={member.id}/>
               </div>
             </div>
     </>

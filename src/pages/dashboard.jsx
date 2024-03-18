@@ -53,7 +53,7 @@ function Dashboard() {
             <Route path="user-management" element={<UserManagement />} />
             <Route path="user-management/profile-member/:id" element={<ProfileMember/>}/>
             <Route path="user-management/member" element={<Member/>} />
-            <Route path="user-management/edit-member" element={<EditMember/>} />
+            <Route path="user-management/edit-member/:id" element={<EditMember/>} />
             <Route path="assumption" element={<Assumption/>} />
             <Route path="assumption/create-assumption" element={<NewAssumption/>} />
             <Route path="assumption/edit-assumption" element={<EditAssumption/>} />
@@ -62,7 +62,7 @@ function Dashboard() {
             <Route path="seeds-details/new-seeds" element={<NewSeeds/>} />
             <Route path="seeds-details/edit-seeds" element={<EditSeed/>} />
             <Route path="map" element={<MapComponent/>} />
-            <Route path="user-map" element={<FromMap/>} />
+            <Route path="user-map/:id" element={<FromMap/>} />
           </Routes>
         </div>
         <Link
