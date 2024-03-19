@@ -44,13 +44,13 @@ const Calendar = ({ selectedDate, onDateChange }) => {
   return (
     <div className="bg-white p-2 rounded-2xl w-80 h-52">
       <div className="flex justify-between mb-4">
-        <button className="text-primaryColor font-bold bg-transparentColor outline-none border-none cursor-pointer text-xs" onClick={() => changeMonth(-1)}>
+        <button className="text-primaryColor font-bold bg-transparentColor outline-none border-none cursor-pointer text-xs" onClick={() => changeMonth(-12)}>
           {"< Prev Year"}
         </button>
         <h2 className="font-bold text-xs">
           {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' }).format(new Date(currentYear, currentMonth, 1))}
         </h2>
-        <button className="text-primaryColor font-bold bg-transparentColor outline-none border-none cursor-pointer text-xs" onClick={() => changeMonth(1)}>
+        <button className="text-primaryColor font-bold bg-transparentColor outline-none border-none cursor-pointer text-xs" onClick={() => changeMonth(12)}>
           {"Next Year >"}
         </button>
       </div>

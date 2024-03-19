@@ -168,10 +168,10 @@ function UserManagement() {
                     </i>
                   </Link>
                 </button>
-                <button
+                <button onClick={()=>deleteFarmer(member.id)}
                   className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor"
                 >
-                  <i className="text-primaryColor" onClick={()=>deleteFarmer(member.id)}>
+                  <i className="text-primaryColor">
                     <FaRegTrashAlt size={15} />
                   </i>
                 </button>

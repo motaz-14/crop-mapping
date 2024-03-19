@@ -22,10 +22,10 @@ ChartJS.register(
   Filler,
   Legend
 );
-function MyChart() {
+function MyChart(props) {
   // eslint-disable-next-line
   const { getText } = useLanguage(); 
-
+  console.log(props);
   const trueLabel = getText("True", "صح");
   const falseLabel = getText("False", "غلط");
 
@@ -55,13 +55,19 @@ function MyChart() {
       },
     },
   };
+  const currentYear = new Date().getFullYear();
+
 
   const data = {
     labels,
     datasets: [
       {
         label: trueLabel, // Use translated "True" label
-        data: labels.map(() => Math.random() * 1000),
+        data: labels.map((v, i) => {
+          return props.props[1][currentYear + "-" + (i + 1)] !== undefined
+            ? props.props[1][currentYear + "-" + (i + 1)].length
+            : 0;
+        }),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         cubicInterpolationMode: "monotone",
@@ -69,7 +75,10 @@ function MyChart() {
       },
       {
         label: falseLabel, // Use translated "False" label
-        data: labels.map(() => Math.random() * 1000),
+        data: labels.map((v, i) => {
+          return props.props[0][currentYear + "-" + (i + 1)] !== undefined
+            ? props.props[0][currentYear + "-" + (i + 1)].length
+            : 0;}),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         cubicInterpolationMode: "monotone",

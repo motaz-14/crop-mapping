@@ -13,6 +13,7 @@ function Assumption() {
   const [currentPage, setCurrentPage] = useState(1);
   const [assumptions, setAssumptions] = useState([]);
   // eslint-disable-next-line
+  const [deleted,setDeleted] = useState(false);
   const [totalMembers, setTotalMembers] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const { getText } = useLanguage(); 
@@ -32,14 +33,34 @@ function Assumption() {
       console.log(error);
     }
   };
+  const deleteAssumption = async (id)=>{
+    try {
+      const response = await axios.delete(`http://localhost:8080/api/assumption/${id}`,{
+        headers: {
+          authorization: `Bearer ${Cookies.get("jwt")}`,
+        },
+      });
+      setDeleted(!deleted);
+     
+      console.log(response);
+  
+    } catch (error) {
+      console.log(error);
 
+    }
+  }
   useEffect(() => {
     async function fetchData() {
       await getAssumptions();
     }
     fetchData();   
-  }, []);
-
+  }, [deleted]);
+  useEffect(() => {
+    // Compare pages here
+    if (Math.ceil(assumptions.length / membersPerPage) < currentPage) {
+      handleClickBack();
+    }
+  }, [assumptions, currentPage, membersPerPage]);
   const handleClickNext = () => {
     setCurrentPage((prevPage) =>
       prevPage < totalPages ? prevPage + 1 : prevPage
@@ -92,7 +113,7 @@ function Assumption() {
           )
           .map((assumption) => (
             <div
-              key={assumption.farmer.id}
+              key={assumption.id}
               className="flex justify-center items-center gap-2 bg-white mt-2 mb-2"
             >
               <div className="py-4 text-secondaryColor font-bold text-[14px] text-center w-1/5">
@@ -136,7 +157,7 @@ function Assumption() {
                     </i>
                   </Link>
                 </button>
-                <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
+                <button onClick={()=>{deleteAssumption(assumption.id)}} className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
                   <i className="text-primaryColor">
                     <FaRegTrashAlt size={15} />
                   </i>

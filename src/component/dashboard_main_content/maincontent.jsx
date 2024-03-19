@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { BsXLg } from "react-icons/bs";
 import { GrAnnounce } from "react-icons/gr";
@@ -16,9 +16,35 @@ import {
   CartesianGrid,
 } from "recharts";
 import Card from "./card";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function MainContent() {
    // eslint-disable-next-line 
+   const [trueChecks,setTrue] = useState(0);
+   const [falseChecks,setFalse] = useState(0);
+   const [totalChecks,setTotal] = useState(0);
+   const [groupTrue,setGroupTrue] = useState(0);
+   const [groupFalse,setGroupFalse] = useState(0);
+   const getTopData = async ()=>{
+  try {
+    const response = await axios.get("http://localhost:8080/api/analytics/top",{
+      headers: {
+        authorization: `Bearer ${Cookies.get("jwt")}`,
+      },
+    });
+    console.log(response);
+    setFalse(response.data.false);
+    setTotal(response.data.totalChecks);
+    setTrue(response.data.true);
+    setGroupFalse(response.data.groupedFalseAssumptionsByMonth);
+    setGroupTrue(response.data.groupedTrueAssumptionsByMonth);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+
   const { getText, language } = useLanguage(); // Import getText and language from the LanguageContext
   const barChartData = [
     { name: "Jan", value: 30 },
@@ -37,7 +63,13 @@ function MainContent() {
   
   //eslint-disable-next-line
   const [selectedDate, setSelectedDate] = useState(null);
-
+  useEffect(()=>{
+    async function fetchData() {
+      await getTopData();
+      
+    }
+    fetchData();
+  },[]);
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
   };
@@ -50,8 +82,8 @@ function MainContent() {
           icon={GrAnnounce}
           styles="text-white text-2xl bg-[#FFD60A] p-4 rounded-2xl"
           text={getText("Total Checks", "مجموع ")}
-          value={getText("3,782 Times", "3,782 عدد")}
-          description={getText("7.2% More than last month", "اكثر من الشهر الفات")}
+          value={totalChecks}
+          description={""}
         />
 
         {/* Card 2 */}
@@ -59,23 +91,23 @@ function MainContent() {
           icon={FaCheck}
           styles="text-white text-2xl bg-[#01B68D] rounded-2xl p-4"
           text={getText("True", "صح")}
-          value={getText("3,782 Times", "3,782 عدد")}
-          description={getText("7.2% More than last month", "اكثر من الشهر الفات")}
+          value={trueChecks}
+          description={""}
         />
         {/* Card 3 */}
         <Card
           icon={BsXLg}
           styles="text-white text-2xl bg-[#D00000] rounded-2xl p-4"
           text={getText("False", "غلط")}
-          value={getText("3,782 Times", "3,782 عدد")}
-          description={getText("7.2% More than last month", "اكثر من الشهر الفات")}
+          value={falseChecks}
+          description={""}
         />
         {/* 2. Calendar */}
         <Calendar selectedDate={selectedDate} onDateChange={handleDateChange} />
       </div>
       {/* 2. Chart - True and False Analysis */}
       <div className="chart-container bg-white rounded-2xl w-full">
-        <MyChart />
+        <MyChart props={[groupFalse , groupTrue]} />
       </div>
       {/* 3. BarChart - Crop Statistics */}
       <div className="container mx-auto py-4">
@@ -94,7 +126,7 @@ function MainContent() {
             </BarChart>
           </div>
           <div className="w-full h-24">
-            <MostSeeds />
+            <MostSeeds  />
           </div>
         </div>
       </div>
