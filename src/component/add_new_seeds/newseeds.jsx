@@ -8,14 +8,17 @@ function NewSeeds() {
   const [name,setName] = useState("");
   const [desc,setDesc] = useState("");
   const [fert,setFert] = useState("");
+  const [image,setImage] = useState("");
   const handleSave = async ()=>{
     try {
-      const response = await axios.post("http://localhost:8080/api/plant/",{
-        "name":name,
-        "fertlizerConsumption" : fertilizerQuan,
-      }, {
+      const data = new FormData();
+      data.append("name",name);
+      data.append("fertlizerConsumption",fertilizerQuan);
+      data.append("image",image);
+      const response = await axios.post("http://localhost:8080/api/plant/",data, {
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
+          'Content-Type': 'multipart/form-data'
         },
       });
       if (response.status === 201){
@@ -120,12 +123,16 @@ function NewSeeds() {
 
           <div className="flex flex-row gap-2 ml-4 mt-6">
             <div>
-              <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white  rounded-lg outline-none border-primaryColor border">
+            <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
                 <div>
                   <CiExport size={14} />
                 </div>
-                <div>Upload photo</div>
-              </button>
+                <label htmlFor="photo-input" className="cursor-pointer">
+                  Upload photo
+                  <input id="photo-input" type="file" className="hidden" onChange={(e)=>{setImage(e.target.files[0])}}/>
+                </label>
+            </button>
+
             </div>
             <button onClick={handleSave} className="cursor-pointer font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
               <div>Save</div>

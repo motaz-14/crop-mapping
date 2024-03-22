@@ -9,18 +9,22 @@ function Member({ closeModal }) {
   const [lastName,setLastName] = useState("");
   const [nationalId,setNationalId] = useState("");
   const [phone,setPhone] = useState("");
+  const [profile,setProfile] = useState("");
+  const [farmerCard,setFarmerCard] = useState("");
   const { getText } = useLanguage();
   
   const handleSave = async ()=>{
     try {
-      if (firstName&&lastName&&nationalId&&phone){
-        const response = await axios.post("http://localhost:8080/api/farmer/",{
-          "name" : `${firstName} ${lastName}`,
-          "phoneNumber" : phone,
-          "nationalId" : nationalId,
-          "farmerCard" : "farmerCard"
-        },{headers : {
-          authorization : `Bearer ${Cookies.get("jwt")}`
+      if (firstName&&lastName&&nationalId&&phone&&profile&&farmerCard){
+        const data = new FormData();
+        data.append('name', `${firstName} ${lastName}`);
+        data.append('phoneNumber', phone);
+        data.append('nationalId', nationalId);
+        data.append('profile', profile);
+        data.append('farmerCard', farmerCard);
+        const response = await axios.post("http://localhost:8080/api/farmer/",data,{headers : {
+          authorization : `Bearer ${Cookies.get("jwt")}`,
+          'Content-Type': 'multipart/form-data',
         }});
         console.log(response);
         
@@ -125,20 +129,27 @@ function Member({ closeModal }) {
             
             <div className="flex flex-row gap-2 m-4 mt-6">
               <div>
-                <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
-                  <div>
-                    <CiExport size={14} />
-                  </div>
-                  <div>{getText("Upload Farmer Card", "تحميل بطاقة المزارع")}</div>
-                </button>
+              <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
+                <div>
+                  <CiExport size={14} />
+                </div>
+                <label htmlFor={"farmerCard"} className="cursor-pointer">
+                  {getText("Upload Farmer Card", "تحميل بطاقة المزارع")}
+                  <input id="farmerCard" type="file" className="hidden" accept="image/*" onChange={(e)=>{setFarmerCard(e.target.files[0])}} />
+                </label>
+              </button>
               </div>
               <div>
-                <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white  rounded-lg outline-none border-primaryColor border">
-                  <div>
-                    <CiExport size={14} />
-                  </div>
-                  <div>{getText("Upload photo", "حمل الصورة")}</div>
-                </button>
+              <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
+                <div>
+                  <CiExport size={14} />
+                </div>
+                <label htmlFor={"profile"} className="cursor-pointer">
+                  {getText("Upload photo", "حمل الصورة")}
+                  <input id="profile" type="file" className="hidden" accept="image/*" onChange={(e)=>{setProfile(e.target.files[0])}} />
+                </label>
+            </button>
+
                 
               </div>
               <button

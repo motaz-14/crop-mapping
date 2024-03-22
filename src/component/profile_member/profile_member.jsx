@@ -70,6 +70,13 @@ function ProfileMember() {
                 <div className="p-4 text-center font-semibold text-[15px] text-secondaryColor">{member.status}</div>
             </div>
         </div>
+        
+        </div>
+        <div className="p-8 flex flex-col text-center font-semibold text-[15px] text-primaryColor">
+        <label htmlFor="" >
+           {getText(" Farmer Card","كرت الفلاح")}
+          </label>
+        <img src={member.farmerCard} alt="farmer-card"  />
         </div>
       </div>
       <div className="flex justify-center items-center gap-2">

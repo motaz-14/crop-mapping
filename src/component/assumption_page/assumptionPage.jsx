@@ -75,7 +75,7 @@ function Assumption() {
     <>
       <div className="w-full px-6 bg-transparentColor mt-2 mb-2 ml- flex flex-row justify-between ">
         {/* addnew export import filter */}
-        <UserManagementBtns/>
+        <UserManagementBtns assumptions={assumptions}/>
       </div>
       <div className="flex flex-col bg-transparentColor rounded-t-2xl">
         {/* header */}

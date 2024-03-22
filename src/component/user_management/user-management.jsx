@@ -91,7 +91,7 @@ function UserManagement() {
       </div>
       <div className="w-full px-6 bg-transparentColor mt-2 mb-2 ml- flex flex-row justify-between ">
         {/* addnew export import filter */}
-        <UserManagementBtns />
+        <UserManagementBtns members={members} />
       </div>
       <div className="flex flex-col bg-transparentColor rounded-t-2xl">
         {/* header */}
@@ -179,7 +179,7 @@ function UserManagement() {
             </div>
           ))}
       </div>
-      <div className="flex justify-center items-center mt-2 mb-2">
+      <div className="flex justify-center items-center mt-2 mb-2" id="tableId">
         <button
           className="cursor-pointer font-semibold text-center p-2 px-10 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-lg outline-none border-none"
           onClick={handleClickBack}

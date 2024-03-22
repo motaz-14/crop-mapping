@@ -144,23 +144,6 @@ function EditMember() {
                   </div>  
                 </div>
                 <div className="flex flex-row gap-2 m-4 mt-6">
-                  <div>
-                    <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
-                      <div>
-                        <CiExport size={14} />
-                      </div>
-                      <div>{getText("Upload Farmer Card", "تحميل بطاقة المزارع")}</div>
-                    </button>
-                  </div>
-                  <div>
-                    <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white  rounded-lg outline-none border-primaryColor border">
-                      <div>
-                        <CiExport size={14} />
-                      </div>
-                      <div>{getText("Upload photo", "حمل الصورة")}</div>
-                    </button>
-                    
-                  </div>
                   <button
                       onClick={saveUser}
                      className="cursor-pointer font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
