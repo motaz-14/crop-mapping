@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer,Polygon  } from 'react-leaflet';
+import { MapContainer, TileLayer,Polygon, useMap  } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { FeatureGroup } from 'react-leaflet';
@@ -13,6 +13,29 @@ function FromMap() {
   
   const [assumption,setAssumption] = useState("");
   const [coordinates,setCordinates] = useState([]);
+  
+  const getCenterOfPolygon = (coords) => {
+    if (!coords || coords.length === 0) return [30.176613488664007, 31.664954709701263];
+  
+    const numericCoords = coords.map(coord => [parseFloat(coord[0]), parseFloat(coord[1])]);
+  
+    const center = numericCoords.reduce(
+      (accumulator, currentValue) => {
+        return [accumulator[0] + currentValue[0], accumulator[1] + currentValue[1]];
+      },
+      [0, 0]
+    );
+  
+    return [center[0] / numericCoords.length, center[1] / numericCoords.length];
+  };
+  
+  function ChangeView({ coords }) {
+    console.log(coords);
+    const center = getCenterOfPolygon(coords);
+    const map = useMap();
+    map.setView(center, 20);
+    return null;
+  }
   const getAssumptionData = async ()=>{
     try {
       setCordinates([]);
@@ -21,11 +44,9 @@ function FromMap() {
           authorization: `Bearer ${Cookies.get("jwt")}`,
         },
       });
-      console.log(response);
       setAssumption(response.data.assumption);
       if (response.data.assumption != null) {
         const coords = response.data.assumption.location.latlongs.map(element => [element.lat, element.lang]);
-        console.log(coords);
         setCordinates(coords);
       }
       
@@ -44,6 +65,7 @@ function FromMap() {
    <>
    <div className="w-11/12 h-4/5 flex flex-col">
       <MapContainer center={ coordinates.length===0? [30.176613488664007, 31.664954709701263] : coordinates[0]} zoom={10} style={{ height: '100%', width: '100%' }}>
+      {coordinates.length > 0 && <ChangeView coords={coordinates} />}
       <TileLayer
   url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"/>
     
