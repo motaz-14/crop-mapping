@@ -105,8 +105,9 @@ function NewAssumption() {
         <div className="flex flex-row items-center w-11/12 h-3/4 bg-white rounded-2xl">
         <div className="w-2/3 h-4/5 flex flex-col pl-2 gap-5">
         <MapContainer center={[30.176613488664007, 31.664954709701263]} zoom={10} style={{ height: '100%', width: '100%' }}>
-        <TileLayer url="https://maptiles.p.rapidapi.com/en/map/v1/{z}/{x}/{y}.png?rapidapi-key=9270635570mshce84b9ebfa3a04ep1de683jsnc813f569c7e2"
-        />
+        <TileLayer
+  url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"/>
+  
         <FeatureGroup>
           <EditControl
             

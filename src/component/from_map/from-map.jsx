@@ -44,8 +44,9 @@ function FromMap() {
    <>
    <div className="w-11/12 h-4/5 flex flex-col">
       <MapContainer center={ coordinates.length===0? [30.176613488664007, 31.664954709701263] : coordinates[0]} zoom={10} style={{ height: '100%', width: '100%' }}>
-        <TileLayer url="https://maptiles.p.rapidapi.com/en/map/v1/{z}/{x}/{y}.png?rapidapi-key=9270635570mshce84b9ebfa3a04ep1de683jsnc813f569c7e2"
-        />
+      <TileLayer
+  url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"/>
+    
         <FeatureGroup>
 
           <EditControl
