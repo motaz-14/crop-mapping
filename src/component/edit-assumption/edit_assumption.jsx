@@ -1,106 +1,124 @@
+import  Axios from "axios";
 import { useLanguage } from "../../LanguageContext"; 
 import { CiExport } from 'react-icons/ci';
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { useParams  } from 'react-router-dom';
 
 function EditAssumption() {
     const { getText } = useLanguage();
+    const [seeds,setSeeds] = useState([]);
+    const [selectedSeed, setSelectedSeed] = useState(null);
+    const [selectedResultSeed, setSelectedResultSeed] = useState(null);
+    const { id } = useParams();
+    const getSeeds = async ()=>{
+      try {
+        const response = await Axios.get("http://localhost:8080/api/plant",{
+          headers:{
+            "authorization" : `Bearer ${Cookies.get("jwt")}`
+          }
+        });
+        setSeeds(response.data.plants);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    const getAssumption = async ()=>{
+      try {
+        const response = await Axios.get(`http://localhost:8080/api/assumption/${id}`,{
+          headers:{
+            "authorization" : `Bearer ${Cookies.get("jwt")}`
+          }
+        });
+        
+        console.log(response.data);
+        setSelectedSeed(response.data.assumption.farmerAssumption.id);
+        setSelectedResultSeed(response.data.assumption.ai_Assumption.id)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    const saveAssumption = async ()=>{
+      try {
+        const response = await Axios.post(`http://localhost:8080/api/assumption/${id}`,{
+          "result" : selectedResultSeed,
+          "planted" : selectedSeed
+        },{
+          headers:{
+            "authorization" : `Bearer ${Cookies.get("jwt")}`
+          }
+        });
+        
+        console.log(response.data);
+       
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    useEffect(()=>{
+      async function fetchData() {
+        await getSeeds();
+        await getAssumption();
+      }
+      fetchData();
+    },[]);
     return (
         <>
             <div className="flex flex-row items-center w-11/12 h-1/2 bg-white rounded-2xl">
               <div className="w-1/2 flex flex-col">
                 <h2 className="text-secondaryColor font-bold m-5">{getText("Edit Assumption", "تعديل افتراض")}</h2>
                 <div className="flex flex-row gap-2">
-                  <div className="p-4 rounded-lg">
-                    <div class="relative">
-                      <input
-                        type="text"
-                        id="national-id"
-                        name="national-id"
-                        className=" bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent px-2 ring-secondaryColor focus:outline-none border border-secondaryColor focus:border-secondaryColor"
-                        placeholder=""
-                      />
-                      <label
-                        for="national-id"
-                        className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-                      >
-                        {getText("National ID", "الهوية الوطنية")}
-    
-                      </label>
-                    </div>
-                  </div>
-                  <div className="p-4 rounded-lg">
-                    <div class="relative">
-                      <input
-                      
-                        type="text"
-                        id="member-name"
-                        name="member-name"
-                        className=" bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent px-2 ring-white focus:outline-none border border-[#666666] focus:border-[#666666]"
-                        placeholder=""
-                      />
-                      <label
-                        for="member-name"
-                        className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-                      >
-                        {getText("Member Name", "اسم عضو")}
-                      </label>
-                    </div>
-                  </div>
+                  
+                
                 </div>
                 <div className="flex flex-row gap-2">
                   <div className="p-4 rounded-lg">
                     <div class="relative">
-                      <input
-                        type="text"
-                        id="seed"
-                        name="seed"
-                        className=" bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent px-2 ring-white focus:outline-none border border-[#666666] focus:border-[#666666]"
-                        placeholder=""
-                      />
-                      <label
-                        for="seed"
-                        className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-                      >
-                        {getText("Seed", "بذرة")}
-                      </label>
+                    <div className="">
+              <select
+                value={selectedSeed || ''}
+                onChange={(e) => {setSelectedSeed(e.target.value);}}
+                className="inline-flex justify-center items-center w-full px-4 py-2 bg-white text-sm font-medium text-primaryColor rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              >
+                <option value="" disabled>
+                  Select a seed
+                </option>
+                {seeds.map((seed) => (
+                  <option key={seed.id} value={seed.id}>
+                    {seed.name}
+                  </option>
+                ))}
+              </select>
+            </div>
                     </div>
                   </div>
                   <div className="p-4 rounded-lg">
                     <div class="relative">
-                      <input
-                        type="text"
-                        id="Result"
-                        name="Result"
-                        className="bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent px-2 ring-white focus:outline-none border border-[#666666] focus:border-[#666666]"
-                        placeholder=""
-                      />
-                      <label
-                        for="Result"
-                        className="absolute cursor-text left-0 -top-3 text-sm text-secondaryColor bg-white mx-1 px-1peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
-                      >
-                       {getText("Result", "نتيجة")}
-                      </label>
+                    <div className="">
+              <select
+                value={selectedResultSeed || ''}
+                onChange={(e) => {setSelectedResultSeed(e.target.value);}}
+                className="inline-flex justify-center items-center w-full px-4 py-2 bg-white text-sm font-medium text-primaryColor rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              >
+                <option value="" disabled>
+                  {getText("Result", "نتيجة")}
+                </option>
+                {seeds.map((seed) => (
+                  <option key={seed.id} value={seed.id}>
+                    {seed.name}
+                  </option>
+                ))}
+              </select>
+                    
+                    </div>
                     </div>
                   </div>  
                 </div>
                 <div className="flex flex-row gap-2 m-4 mt-6">
-                  <div>
-                    <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white rounded-lg outline-none border-primaryColor border">
-                      <div>
-                        <CiExport size={14} />
-                      </div>
-                      <div>{getText("Upload Farmer Card", "تحميل بطاقة المزارع")}</div>
-                    </button>
-                  </div>
-                  <div>
-                    <button className="cursor-pointer flex flex-row gap-2 justify-center items-center font-semibold text-center py-2 px-4 bg-primaryColor text-white  rounded-lg outline-none border-primaryColor border">
-                      <div>
-                        <CiExport size={14} />
-                      </div>
-                      <div>{getText("Upload photo", "حمل الصورة")}</div>
-                    </button>
-                  </div>
-                  <button
-                     className="cursor-pointer font-semibold text-center w-28 py-2 bg-primaryColor text-white rounded-2xl outline-none border-none">
+               
+                  <button onClick={saveAssumption}
+                     className="cursor-pointer font-semibold text-center w-[150px] py-4  bg-primaryColor text-white rounded-2xl outline-none border-none">
                       <div>{getText("Save", "حفظ")}</div>
                     </button>
                 </div>

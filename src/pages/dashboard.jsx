@@ -56,7 +56,7 @@ function Dashboard() {
             <Route path="user-management/edit-member/:id" element={<EditMember/>} />
             <Route path="assumption" element={<Assumption/>} />
             <Route path="assumption/create-assumption" element={<NewAssumption/>} />
-            <Route path="assumption/edit-assumption" element={<EditAssumption/>} />
+            <Route path="assumption/edit-assumption/:id" element={<EditAssumption/>} />
             <Route path="seeds-details" element={<SeedsDetails />} />
             <Route path="seeds-details/fertilizer-calculator" element={<FertilizerCalculator />} />
             <Route path="seeds-details/new-seeds" element={<NewSeeds/>} />
