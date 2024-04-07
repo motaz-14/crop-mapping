@@ -29,7 +29,7 @@ const MapComponent = () => {
     if (latlungs.length > 0) {
       console.log(latlungs);
       try {
-        const response  = await axios.post("http://localhost:8080/api/location/predict",{
+        const response  = await axios.post("http://localhost:8080/api/prediction/",{
           points : latlungs
         },{headers : {
           authorization: `Bearer ${Cookies.get("jwt")}`
