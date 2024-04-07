@@ -1,62 +1,71 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import seedsImage from "../../assets/tomato.svg";
-import { FiEdit } from "react-icons/fi";
-import { FaEye } from "react-icons/fa";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { CiCalculator1 } from "react-icons/ci";
-import Addbutton from "../addbutton";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { FiEdit } from "react-icons/fi";
+import { FaEye, FaRegTrashAlt } from "react-icons/fa";
+import { CiCalculator1 } from "react-icons/ci";
+import Addbutton from "../addbutton";
 
 function SeedsDetails() {
-  const [seeds,setSeeds] = useState([]);
-  
-  const seedesPerPage = 7;
+  const [seeds, setSeeds] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(Array(seeds.length).fill(false));
   const [currentPage, setCurrentPage] = useState(1);
-  const totalseedes = seeds.length;
-  const totalPages = Math.ceil(totalseedes / seedesPerPage);
-  const [showDropdown, setShowDropdown] = useState(
-    Array(seedesPerPage).fill(false)
-  );
-  
-  const getSeeds = async ()=>{
-    try {
-      const response = await axios.get("http://localhost:8080/api/plant",{
-        headers:{
-          "authorization" : `Bearer ${Cookies.get("jwt")}`
-        }
-      });
-      setSeeds(response.data.plants);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  useEffect(()=>{
-    async function fetchData(){
-      await getSeeds();
+  const seedesPerPage = 7;
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("http://localhost:8080/api/plant", {
+          headers: {
+            "authorization": `Bearer ${Cookies.get("jwt")}`
+          }
+        });
+        setSeeds(response.data.plants);
+      } catch (error) {
+        console.log(error);
+      }
     }
     fetchData();
-  },[]);
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      const dropdowns = document.querySelectorAll('.dropdown');
+      dropdowns.forEach((dropdown, index) => {
+        if (!dropdown.contains(event.target)) {
+          setShowDropdown(prevState => {
+            const newState = [...prevState];
+            newState[index] = false;
+            return newState;
+          });
+        }
+      });
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleClickNext = () => {
-    setCurrentPage((prevPage) =>
-      prevPage < totalPages ? prevPage + 1 : prevPage
-    );
+    setCurrentPage(prevPage => (prevPage < totalPages ? prevPage + 1 : prevPage));
   };
 
   const handleClickBack = () => {
-    setCurrentPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
+    setCurrentPage(prevPage => (prevPage > 1 ? prevPage - 1 : prevPage));
   };
 
-  const handleToggleDropdown = (index) => {
-    setShowDropdown((prevShowDropdown) => {
+  const handleToggleDropdown = index => {
+    setShowDropdown(prevShowDropdown => {
       const newShowDropdown = [...prevShowDropdown];
       newShowDropdown[index] = !newShowDropdown[index];
       return newShowDropdown;
     });
   };
+
+  const totalPages = Math.ceil(seeds.length / seedesPerPage);
+
   return (
     <>
       <div className="flex flex-row  justify-start items-center gap-3 ml-4 mb-3 mt-3">
@@ -68,7 +77,7 @@ function SeedsDetails() {
         </div>
         <div className="">
           <Link
-          to={'fertilizer-calculator'}
+            to={'fertilizer-calculator'}
             className="no-underline flex flex-row gap-2 font-semibold text-center py-3 px-4 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-lg outline-none border-none"
           >
             <div>
@@ -132,25 +141,27 @@ function SeedsDetails() {
                   className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor"
                   onClick={() => handleToggleDropdown(index)}
                 >
-                  <Link to={"edit-seeds"}>
                   <i className="text-primaryColor">
                     <FiEdit size={15} />
                   </i>
-                  </Link>
                 </button>
                 {showDropdown[index] && (
-                  <div className="absolute left-[150px] top-0 bg-white p-4 border rounded text-start">
+                  <div className="absolute left-[55%] top-0 bg-white p-4 border rounded text-start dropdown">
                     <div className="font-light text-[11px] cursor-pointer mb-2 text-secondaryColor flex flex-row gap-1 text-start justify-start">
-                      <FiEdit />
-                      Edit
+                      <Link to={"edit-seeds"} className="no-underline">
+                        <FiEdit className="mr-1" />
+                        Edit
+                      </Link>
                     </div>
                     <div className="font-light text-[11px] cursor-pointer mb-2 text-secondaryColor flex flex-row gap-1 text-start justify-start">
                       <FaRegTrashAlt />
                       Delete
                     </div>
                     <div className="font-light text-[11px] cursor-pointer text-secondaryColor flex flex-row gap-1 text-start justify-start">
-                      <FaEye />
-                      Preview
+                      <Link to={"edit-seeds"} className="no-underline">
+                        <FaEye className="mr-1" />
+                        Preview
+                      </Link>
                     </div>
                   </div>
                 )}

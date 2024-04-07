@@ -1,5 +1,5 @@
 import React from 'react';
-import { CiExport, CiImport, CiFilter } from 'react-icons/ci';
+import { CiImport } from 'react-icons/ci';
 import AddButton from '../addbutton';
 import { useLanguage } from '../../LanguageContext'; // Import the useLanguage hook from your LanguageContext
 import * as XLSX from 'xlsx';
@@ -75,16 +75,7 @@ function UserManagementBtns(props) {
           </button>
         </div>
       </div>
-      <div className="flex flex-row px-8 justify-center">
-        <button
-          className="cursor-pointer flex flex-row justify-center items-center gap-2 font-semibold text-center py-3 px-4 bg-gradient-to-r from-[#01E5B2] to-[#01B68D] text-white rounded-lg outline-none border-none"
-        >
-          <div>
-            <CiFilter size={14} />
-          </div>
-          <div>{getText('Filters', 'الفلاتر')}</div> {/* Translate "Filters" */}
-        </button>
-      </div>
+      
     </>
   );
 }

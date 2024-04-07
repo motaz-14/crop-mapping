@@ -155,11 +155,13 @@ function UserManagement() {
               </div>
               <div className="flex items-center justify-center w-1/5">
                 <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
-                  <Link to={`profile-member/${member.id}`}>
-                    <i className="text-primaryColor">
-                      <VscEye size={15} />
-                    </i>
-                  </Link>
+                <Link to={`profile-member/${member.id}`}>
+                {() => (
+                  <i className="text-primaryColor">
+                    <VscEye size={15} />
+                  </i>
+                )}
+              </Link>
                 </button>
                 <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
                   <Link to={`edit-member/${member.id}`}>
