@@ -68,8 +68,8 @@ function MyChart(props) {
             ? props.props[1][currentYear + "-" + (i + 1)].length
             : 0;
         }),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgb(0, 255, 0)",
+        backgroundColor: "rgba(0, 180, 0, 0.5)",
         cubicInterpolationMode: "monotone",
         fill: true,
       },
@@ -79,8 +79,8 @@ function MyChart(props) {
           return props.props[0][currentYear + "-" + (i + 1)] !== undefined
             ? props.props[0][currentYear + "-" + (i + 1)].length
             : 0;}),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "rgb(255, 0, 0)",
+        backgroundColor: "rgba(150, 0, 0,0.5)",
         cubicInterpolationMode: "monotone",
         fill: true,
       },
