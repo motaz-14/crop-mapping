@@ -35,6 +35,7 @@ const MapComponent = () => {
           authorization: `Bearer ${Cookies.get("jwt")}`
         }});
         console.log(response);
+        alert(response.data.prediction.most_frequent_class_label);
       } catch (error) {
         alert(error.response.data.message)
         console.log(error);
