@@ -13,7 +13,7 @@ function EditAssumption() {
     const { id } = useParams();
     const getSeeds = async ()=>{
       try {
-        const response = await Axios.get("http://localhost:8080/api/plant",{
+        const response = await Axios.get("http://207.154.232.68/api/plant",{
           headers:{
             "authorization" : `Bearer ${Cookies.get("jwt")}`
           }
@@ -26,7 +26,7 @@ function EditAssumption() {
     }
     const getAssumption = async ()=>{
       try {
-        const response = await Axios.get(`http://localhost:8080/api/assumption/${id}`,{
+        const response = await Axios.get(`http://207.154.232.68/api/assumption/${id}`,{
           headers:{
             "authorization" : `Bearer ${Cookies.get("jwt")}`
           }
@@ -41,7 +41,7 @@ function EditAssumption() {
     }
     const saveAssumption = async ()=>{
       try {
-        const response = await Axios.post(`http://localhost:8080/api/assumption/${id}`,{
+        const response = await Axios.post(`http://207.154.232.68/api/assumption/${id}`,{
           "result" : selectedResultSeed,
           "planted" : selectedSeed
         },{

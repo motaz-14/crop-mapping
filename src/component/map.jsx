@@ -7,12 +7,14 @@ import { EditControl } from 'react-leaflet-draw';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useRef } from 'react';
+import {ToastContainer, toast } from 'react-toastify';
 
 const MapComponent = () => {
   const [selectedArea, setSelectedArea] = useState([]);
   const [latlungs,setLatlungs] = useState([]);
   const [prediction,setPrediction] = useState();
   const  [loading , setLoading ] = useState(false);
+  const [most_frequent_percentage,setMost_frequent_percentage] = useState(0);
   const featureGroupRef = useRef();
 
   const handleSelection = (e) => {
@@ -41,19 +43,25 @@ const MapComponent = () => {
       console.log(latlungs);
       try {
         setLoading(true);
-        const response  = await axios.post("http://localhost:8080/api/prediction/",{
+        const response  = await axios.post("http://207.154.232.68/api/prediction/",{
           points : latlungs
         },{headers : {
           authorization: `Bearer ${Cookies.get("jwt")}`
         }});
+        toast.success("Area Detected Successfully");
         console.log(response);
         setPrediction( response.data.prediction.most_frequent_class_label);
+        setMost_frequent_percentage(response.data.prediction.most_frequent_percentage);
         setLoading(false)
+        
       } catch (error) {
-        alert(error.response.data.message)
+        toast.error("Error, try again later");
         setLoading(false);
         console.log(error);
       }
+    }
+    else {
+      toast.error("Must choose area to detect!");
     }
   };
 
@@ -64,6 +72,10 @@ const MapComponent = () => {
           <MapContainer center={[30.176613488664007, 31.664954709701263]} zoom={10} style={{ height: '100%', width: '100%' }}>
           <TileLayer
       url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"/>
+      <TileLayer
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
+        attribution="Esri, HERE, Garmin, © OpenStreetMap contributors, and the GIS user community"
+      />
             <FeatureGroup ref={featureGroupRef}>
               <EditControl
                 
@@ -76,8 +88,7 @@ const MapComponent = () => {
                   clearSelection();
                 }}
                 
-                onDeleteStart={clearSelection}
-                onDeleteStop={clearSelection}
+          
                 draw={{
                   rectangle: true,
                   circle: false,
@@ -94,9 +105,9 @@ const MapComponent = () => {
               {latlungs.length > 0 ? latlungs.slice(0,5).map(a=>{ return <p class="mb-4">[{a.lat} , {a.lng}]</p> } ): "No Area Selected yet"}
               {latlungs.length > 5 ?  <p class="mb-4">{latlungs.length - 5} more  .......</p> : "" }
               <h3 class="text-lg font-bold mb-2">Detected Plant:</h3>
-              <p>  {  !loading?   prediction!=null? prediction : "No Crop Detected" :  <div className="flex justify-center items-center">
+               {  !loading?   prediction!=null?<div className='flex flex-col'> <p> {prediction} </p><p> Precentage of {prediction} in the image  = {most_frequent_percentage}%</p> </div> :<p>No Crop Detected </p>:  <div className="flex justify-center items-center">
       <div className="w-8 h-8 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-    </div>}</p>
+    </div>}
           </div>
           </div>
             <div className="text-primaryColor w-full bg-white rounded-lg mt-2 p-2">

@@ -16,7 +16,7 @@ function SeedsDetails() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:8080/api/plant", {
+        const response = await axios.get("http://207.154.232.68/api/plant", {
           headers: {
             "authorization": `Bearer ${Cookies.get("jwt")}`
           }
@@ -111,7 +111,7 @@ function SeedsDetails() {
               className="flex justify-center items-center gap-2 bg-white mt-2 mb-2 ml-4 rounded-lg"
             >
               <div className="p-4 text-center self-center flex justify-center gap-1 w-1/5">
-                <input type="checkbox" className="cursor-pointer" />
+                
                 <div className="w-14 h-14 overflow-hidden rounded-full">
                   <img
                     src={seede.photo}

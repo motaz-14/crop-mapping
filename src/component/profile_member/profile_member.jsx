@@ -14,7 +14,7 @@ function ProfileMember() {
   const [assumptions,setAssumptions] = useState([]);
   const getAssumptions = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/assumption/user/${id}`, {
+      const response = await axios.get(`http://207.154.232.68/api/assumption/user/${id}`, {
         headers: {
           "authorization": `Bearer ${Cookies.get("jwt")}`
         }
@@ -29,7 +29,7 @@ function ProfileMember() {
   const getUser = async ()=>{
    
     try {
-      const response = await axios.get(`http://localhost:8080/api/farmer/${id}`, {
+      const response = await axios.get(`http://207.154.232.68/api/farmer/${id}`, {
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
         },

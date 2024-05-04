@@ -2,12 +2,14 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CiExport } from "react-icons/ci";
+import { ToastContainer,toast } from 'react-toastify';
 
 function NewSeeds() {
   const [fertilizerQuan, setFertilizerQuan] = useState("");
   const [name,setName] = useState("");
   const [desc,setDesc] = useState("");
   const [fert,setFert] = useState("");
+ 
   const [image,setImage] = useState("");
   const handleSave = async ()=>{
     try {
@@ -15,19 +17,20 @@ function NewSeeds() {
       data.append("name",name);
       data.append("fertlizerConsumption",fertilizerQuan);
       data.append("image",image);
-      const response = await axios.post("http://localhost:8080/api/plant/",data, {
+      const response = await axios.post("http://207.154.232.68/api/plant/",data, {
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
           'Content-Type': 'multipart/form-data'
         },
       });
       if (response.status === 201){
-        alert("Created");
+        toast.success("Added Seed Successfully");
       }
      
     
     } catch (error) {
       console.log(error);
+      toast.error("Error, try again later");
     }
   }
   const handleFertilizerQuanChange = (event) => {

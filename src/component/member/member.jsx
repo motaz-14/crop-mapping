@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CiExport } from "react-icons/ci";
 import { useLanguage } from "../../LanguageContext"; 
-
+import { ToastContainer,toast } from 'react-toastify';
 function Member({ closeModal }) {
   const [firstName,setFirstName] = useState("");
   const [lastName,setLastName] = useState("");
@@ -13,6 +13,7 @@ function Member({ closeModal }) {
   const [farmerCard,setFarmerCard] = useState("");
   const { getText } = useLanguage();
   
+
   const handleSave = async ()=>{
     try {
       if (firstName&&lastName&&nationalId&&phone&&profile&&farmerCard){
@@ -22,15 +23,21 @@ function Member({ closeModal }) {
         data.append('nationalId', nationalId);
         data.append('profile', profile);
         data.append('farmerCard', farmerCard);
-        const response = await axios.post("http://localhost:8080/api/farmer/",data,{headers : {
+        const response = await axios.post("http://207.154.232.68/api/farmer/",data,{headers : {
           authorization : `Bearer ${Cookies.get("jwt")}`,
           'Content-Type': 'multipart/form-data',
         }});
-        console.log(response);
+        if (response.status === 200 || response.status===201){
+          toast.success("Added User Successfully");
+        }
+        else {
+          console.log(response);
+        }
         
       }
     } catch (error) {
       console.log(error);
+      toast.error("Error, try again later");
     }
   }
   return (

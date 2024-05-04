@@ -22,7 +22,7 @@ function UserManagement() {
 
   const getFarmers = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/farmer/", {
+      const response = await axios.get("http://207.154.232.68/api/farmer/", {
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
         },
@@ -37,7 +37,7 @@ function UserManagement() {
   };
   const deleteFarmer = async (id)=>{
     try {
-      const response = await axios.delete(`http://localhost:8080/api/farmer/${id}`,{
+      const response = await axios.delete(`http://207.154.232.68/api/farmer/${id}`,{
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
         },
@@ -156,11 +156,11 @@ function UserManagement() {
               <div className="flex items-center justify-center w-1/5">
                 <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">
                 <Link to={`profile-member/${member.id}`}>
-                {() => (
+          
                   <i className="text-primaryColor">
                     <VscEye size={15} />
                   </i>
-                )}
+         
               </Link>
                 </button>
                 <button className="cursor-pointer border-none outline-none px-2 py-1 rounded bg-transparentColor">

@@ -39,7 +39,7 @@ function FromMap() {
   const getAssumptionData = async ()=>{
     try {
       setCordinates([]);
-      const response = await axios.get(`http://localhost:8080/api/assumption/${id}`, {
+      const response = await axios.get(`http://207.154.232.68/api/assumption/${id}`, {
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
         },

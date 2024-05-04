@@ -6,6 +6,7 @@ import Calendar from "./calender";
 import MyChart from "./chart";
 import MostSeeds from "./mostseeds";
 import { useLanguage } from "../../LanguageContext";
+import './styleMain.css';
 import {
   BarChart,
   Bar,
@@ -20,30 +21,30 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 function MainContent() {
-   // eslint-disable-next-line 
-   const [trueChecks,setTrue] = useState(0);
-   const [falseChecks,setFalse] = useState(0);
-   const [totalChecks,setTotal] = useState(0);
-   const [groupTrue,setGroupTrue] = useState(0);
-   const [groupFalse,setGroupFalse] = useState(0);
-   const getTopData = async ()=>{
-  try {
-    const response = await axios.get("http://localhost:8080/api/analytics/top",{
-      headers: {
-        authorization: `Bearer ${Cookies.get("jwt")}`,
-      },
-    });
-    console.log(response);
-    setFalse(response.data.false);
-    setTotal(response.data.totalChecks);
-    setTrue(response.data.true);
-    setGroupFalse(response.data.groupedFalseAssumptionsByMonth);
-    setGroupTrue(response.data.groupedTrueAssumptionsByMonth);
+  // eslint-disable-next-line 
+  const [trueChecks, setTrue] = useState(0);
+  const [falseChecks, setFalse] = useState(0);
+  const [totalChecks, setTotal] = useState(0);
+  const [groupTrue, setGroupTrue] = useState(0);
+  const [groupFalse, setGroupFalse] = useState(0);
+  const getTopData = async () => {
+    try {
+      const response = await axios.get("http://207.154.232.68/api/analytics/top", {
+        headers: {
+          authorization: `Bearer ${Cookies.get("jwt")}`,
+        },
+      });
+      console.log(response);
+      setFalse(response.data.false);
+      setTotal(response.data.totalChecks);
+      setTrue(response.data.true);
+      setGroupFalse(response.data.groupedFalseAssumptionsByMonth);
+      setGroupTrue(response.data.groupedTrueAssumptionsByMonth);
     } catch (error) {
       console.log(error);
     }
   }
-  
+
 
   const { getText, language } = useLanguage(); // Import getText and language from the LanguageContext
   const barChartData = [
@@ -60,16 +61,16 @@ function MainContent() {
     { name: "Nov", value: 30 },
     { name: "Dec", value: 30 },
   ];
-  
+
   //eslint-disable-next-line
   const [selectedDate, setSelectedDate] = useState(null);
-  useEffect(()=>{
+  useEffect(() => {
     async function fetchData() {
       await getTopData();
-      
+
     }
     fetchData();
-  },[]);
+  }, []);
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
   };
@@ -106,30 +107,12 @@ function MainContent() {
         <Calendar selectedDate={selectedDate} onDateChange={handleDateChange} />
       </div>
       {/* 2. Chart - True and False Analysis */}
-      <div className="chart-container bg-white rounded-2xl w-full">
-        <MyChart props={[groupFalse , groupTrue]} />
+      <div className="chart-container bg-white rounded-2xl w-full mb-5">
+        <MyChart props={[groupFalse, groupTrue]} />
       </div>
       {/* 3. BarChart - Crop Statistics */}
-      <div className="container mx-auto py-4">
-        <div className="flex justify-between">
-          <div className="w-full bg-white p-2 rounded-2xl flex flex-col gap-5">
-            <label className="font-[Spartan] font-bold text-[20px] text-secondaryColor ml-9">
-            {getText("Crop Statistics", "إحصائيات المحصول")}
-            </label>
-            <BarChart width={900} height={300} data={barChartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="value" fill="#01B68D" barSize={30} />
-            </BarChart>
-          </div>
-          <div className="w-full h-24">
-            <MostSeeds  />
-          </div>
-        </div>
-      </div>
+     
+
     </>
   );
 }

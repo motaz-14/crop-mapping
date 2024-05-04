@@ -6,6 +6,7 @@ import { FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import axios from "axios";
 import Cookies from "js-cookie";
+import { ToastContainer,toast } from 'react-toastify';
 
 function NewAssumption() {
   const [selectedSeed, setSelectedSeed] = useState(null);
@@ -23,7 +24,7 @@ function NewAssumption() {
       {farmerId:selectedMember}:
       {nationalId:nationalId};
       
-      const response = await axios.post("http://localhost:8080/api/assumption/",{
+      const response = await axios.post("http://207.154.232.68/api/assumption/",{
         startDate:selectedDate,
         plantId:selectedSeed,
         latlungs:latlungs,
@@ -34,15 +35,16 @@ function NewAssumption() {
         },
       });
       if (response.status === 201){
-        alert("Created");
+        toast.success("Added assumption successfully");
       }
     } catch (error) {
       console.log(error);
+      toast.error("Error, try again later");
     }
   }
   const getFarmers = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/farmer/", {
+      const response = await axios.get("http://207.154.232.68/api/farmer/", {
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
         },
@@ -56,7 +58,7 @@ function NewAssumption() {
   };
   const getSeeds = async ()=>{
     try {
-      const response = await axios.get("http://localhost:8080/api/plant",{
+      const response = await axios.get("http://207.154.232.68/api/plant",{
         headers:{
           "authorization" : `Bearer ${Cookies.get("jwt")}`
         }

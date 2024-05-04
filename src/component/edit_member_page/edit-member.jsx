@@ -15,7 +15,7 @@ function EditMember() {
   const { id } = useParams();
   const saveUser = async ()=>{
     try {
-      const response = await axios.patch(`http://localhost:8080/api/farmer/${id}`, {
+      const response = await axios.patch(`http://207.154.232.68/api/farmer/${id}`, {
         name,
         nationalId,
         phoneNumber,
@@ -34,7 +34,7 @@ function EditMember() {
   const getUser = async ()=>{
    
     try {
-      const response = await axios.get(`http://localhost:8080/api/farmer/${id}`, {
+      const response = await axios.get(`http://207.154.232.68/api/farmer/${id}`, {
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
         },

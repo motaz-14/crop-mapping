@@ -20,6 +20,7 @@ import EditMember from "../component/edit_member_page/edit-member";
 import FromMap from "../component/from_map/from-map";
 import EditAssumption from "../component/edit-assumption/edit_assumption";
 import EditSeed from "../component/edit_seed/edit-seed";
+import DesktopOnly from "./desktop";
 
 function Dashboard() {
   useEffect(() => {
@@ -44,6 +45,7 @@ function Dashboard() {
 
   return (
     <>
+    <DesktopOnly>
       <div className="flex h-screen bg-background-main-screen gap-2">
      <SideBar />
         <div className={`flex-1 flex flex-col ${language === 'ar' ? 'pl-5' : 'pr-5'} overflow-y-auto overflow-x-hidden`}>
@@ -74,6 +76,7 @@ function Dashboard() {
           </div>
         </Link>
       </div>
+      </DesktopOnly>
     </>
   );
 }

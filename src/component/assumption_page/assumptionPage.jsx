@@ -20,7 +20,7 @@ function Assumption() {
 
   const getAssumptions = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/assumption/", {
+      const response = await axios.get("http://207.154.232.68/api/assumption/", {
         headers: {
           "authorization": `Bearer ${Cookies.get("jwt")}`
         }
@@ -35,7 +35,7 @@ function Assumption() {
   };
   const deleteAssumption = async (id)=>{
     try {
-      const response = await axios.delete(`http://localhost:8080/api/assumption/${id}`,{
+      const response = await axios.delete(`http://207.154.232.68/api/assumption/${id}`,{
         headers: {
           authorization: `Bearer ${Cookies.get("jwt")}`,
         },

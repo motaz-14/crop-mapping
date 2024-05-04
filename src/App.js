@@ -3,12 +3,13 @@ import Dashboard from './pages/dashboard';
 import Login from './pages/login';
 import { LanguageProvider } from './LanguageContext';
 import Cookies from "js-cookie";
-
+import { ToastContainer,toast } from 'react-toastify';
 import { 
   Route,
   Routes,Redirect 
  } from "react-router-dom";
 import { useEffect } from 'react';
+
 function App() {
   useEffect(() => {
     const token = Cookies.get('jwt');
@@ -28,6 +29,7 @@ function App() {
         <Route path='*' to="/login" />
       </Routes>
       </LanguageProvider>
+      <ToastContainer />
     </div>
   );
 }
