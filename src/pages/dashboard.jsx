@@ -62,7 +62,7 @@ function Dashboard() {
             <Route path="seeds-details" element={<SeedsDetails />} />
             <Route path="seeds-details/fertilizer-calculator" element={<FertilizerCalculator />} />
             <Route path="seeds-details/new-seeds" element={<NewSeeds/>} />
-            <Route path="seeds-details/edit-seeds" element={<EditSeed/>} />
+            <Route path="seeds-details/edit-seeds/:id" element={<EditSeed/>} />
             <Route path="map" element={<MapComponent/>} />
             <Route path="user-map/:id" element={<FromMap/>} />
           </Routes>

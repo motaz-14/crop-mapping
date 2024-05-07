@@ -148,7 +148,7 @@ function SeedsDetails() {
                 {showDropdown[index] && (
                   <div className="absolute left-[55%] top-0 bg-white p-4 border rounded text-start dropdown">
                     <div className="font-light text-[11px] cursor-pointer mb-2 text-secondaryColor flex flex-row gap-1 text-start justify-start">
-                      <Link to={"edit-seeds"} className="no-underline">
+                      <Link to={`edit-seeds/${seede.id}`} className="no-underline">
                         <FiEdit className="mr-1" />
                         Edit
                       </Link>
@@ -158,7 +158,7 @@ function SeedsDetails() {
                       Delete
                     </div>
                     <div className="font-light text-[11px] cursor-pointer text-secondaryColor flex flex-row gap-1 text-start justify-start">
-                      <Link to={"edit-seeds"} className="no-underline">
+                      <Link to={`edit-seeds/${seede.id}`} className="no-underline">
                         <FaEye className="mr-1" />
                         Preview
                       </Link>
