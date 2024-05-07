@@ -68,6 +68,7 @@ const MapComponent = () => {
   return (
      
         <div className="w-full h-4/5 flex flex-col">
+          <h3 className='text-red-900'>Notice : This Map isn't Updated! just Choose Location</h3>
           <div className='flex h-full w-full gap-3'>
           <MapContainer center={[30.176613488664007, 31.664954709701263]} zoom={10} style={{ height: '100%', width: '100%' }}>
           <TileLayer
